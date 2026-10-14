@@ -1,2 +1,28 @@
 .DS_Store
 *.mp4
+
+# Python environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# JavaScript dependencies and build output
+node_modules/
+.next/
+dist/
+build/
+coverage/
+
+# Generated or downloaded data
+HW1/Part 1/petfinder-adoption-prediction/
+HW1/Part 1/pipeline/data/
+HW1/Part 1/pipeline/catboost_info/
+HW1/Part 1/pipeline/logs/
+HW1/Part 2/01_nyc_taxi_trip_prediction/data/
+HW1/Part 2/01_nyc_taxi_trip_prediction/processed_data/
+HW1/Part 2/04_associative_pattern_mining/artifacts/.cache/
+HW1/Part 2/05_data_science_skills_lab/webapp/data/creditcard.csv
+HW1/Part 2/05_data_science_skills_lab/webapp/data/online_retail.xlsx
