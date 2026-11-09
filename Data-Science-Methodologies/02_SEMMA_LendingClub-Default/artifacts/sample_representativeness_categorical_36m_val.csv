@@ -1,0 +1,7 @@
+column,categories,chi2,p_value,cramers_v
+grade,7,3.42067,0.75449,0.0041
+purpose,13,8.14399,0.77378,0.00633
+home_ownership,4,1.8925,0.59502,0.00305
+verification_status,3,0.96438,0.61743,0.00218
+emp_length,11,5.00277,0.89099,0.00512
+addr_state,49,26.27057,0.99551,0.01137

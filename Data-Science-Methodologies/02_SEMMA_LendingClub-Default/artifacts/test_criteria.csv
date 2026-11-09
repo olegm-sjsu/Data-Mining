@@ -1,0 +1,7 @@
+criterion,result,pass
+C1 Model A out-of-time ROC-AUC >= 0.68 and >= 0.02 above FICO-only,0.6793 vs FICO-only 0.6008 (+0.0785),False
+C2 KS >= 0.25,0.2598,True
+"C3 calibration slope in [0.8, 1.2] and mean predicted within 1.5 points of observed","slope 0.955; gap 1.96 points (after Platt on 2014: slope 0.973, gap 1.28)",False
+C4 policy return above accept-all with month-block CI excluding 0,"0.051 points; CI [0.042, 0.061]",True
+C5 score PSI train to test <= 0.25 and AUC in each quarter within 0.03 of the overall,"PSI 0.007; quarterly AUC 0.673, 0.676, 0.682, 0.683 vs overall 0.679",True
+C6 no group below 0.8 of the highest approval rate (strict policy); state and zip excluded as inputs,{'income_band': {'Q1 (lowest)': 0.627}},False

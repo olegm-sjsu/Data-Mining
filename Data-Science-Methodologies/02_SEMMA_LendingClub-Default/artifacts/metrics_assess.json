@@ -1,0 +1,128 @@
+{
+ "discrimination": {
+  "roc_auc": {
+   "FICO-only": 0.60078,
+   "A-core scorecard": 0.64563,
+   "A-extended scorecard": 0.66642,
+   "Decision tree A-extended": 0.63999,
+   "LightGBM A-core": 0.6516,
+   "LightGBM A-extended": 0.67929,
+   "MLP A-extended": 0.66549,
+   "B scorecard": 0.68714,
+   "LightGBM B": 0.69269
+  },
+  "pr_auc": {
+   "FICO-only": 0.18688,
+   "A-core scorecard": 0.22778,
+   "A-extended scorecard": 0.2456,
+   "Decision tree A-extended": 0.22403,
+   "LightGBM A-core": 0.23116,
+   "LightGBM A-extended": 0.25669,
+   "MLP A-extended": 0.24417,
+   "B scorecard": 0.26176,
+   "LightGBM B": 0.26963
+  },
+  "ks": {
+   "FICO-only": 0.15189,
+   "A-core scorecard": 0.21067,
+   "A-extended scorecard": 0.24176,
+   "Decision tree A-extended": 0.20633,
+   "LightGBM A-core": 0.22002,
+   "LightGBM A-extended": 0.25979,
+   "MLP A-extended": 0.23848,
+   "B scorecard": 0.2726,
+   "LightGBM B": 0.27889
+  },
+  "brier": {
+   "FICO-only": 0.12496,
+   "A-core scorecard": 0.12307,
+   "A-extended scorecard": 0.12149,
+   "Decision tree A-extended": 0.12327,
+   "LightGBM A-core": 0.12268,
+   "LightGBM A-extended": 0.12062,
+   "MLP A-extended": 0.12176,
+   "B scorecard": 0.1203,
+   "LightGBM B": 0.12051
+  },
+  "gini": {
+   "FICO-only": 0.20157,
+   "A-core scorecard": 0.29126,
+   "A-extended scorecard": 0.33283,
+   "Decision tree A-extended": 0.27998,
+   "LightGBM A-core": 0.30319,
+   "LightGBM A-extended": 0.35859,
+   "MLP A-extended": 0.33098,
+   "B scorecard": 0.37428,
+   "LightGBM B": 0.38537
+  },
+  "validation_auc": {
+   "FICO-only": 0.59637,
+   "A-core scorecard": 0.64895,
+   "A-extended scorecard": 0.6641,
+   "Decision tree A-extended": 0.64265,
+   "LightGBM A-core": 0.65548,
+   "LightGBM A-extended": 0.67839,
+   "MLP A-extended": 0.66192,
+   "B scorecard": 0.68122,
+   "LightGBM B": 0.68879
+  },
+  "auc_change": {
+   "FICO-only": 0.00441,
+   "A-core scorecard": -0.00332,
+   "A-extended scorecard": 0.00232,
+   "Decision tree A-extended": -0.00265,
+   "LightGBM A-core": -0.00388,
+   "LightGBM A-extended": 0.0009,
+   "MLP A-extended": 0.00357,
+   "B scorecard": 0.00592,
+   "LightGBM B": 0.00389
+  }
+ },
+ "criteria": [
+  {
+   "criterion": "C1 Model A out-of-time ROC-AUC >= 0.68 and >= 0.02 above FICO-only",
+   "result": "0.6793 vs FICO-only 0.6008 (+0.0785)",
+   "pass": "False"
+  },
+  {
+   "criterion": "C2 KS >= 0.25",
+   "result": "0.2598",
+   "pass": "True"
+  },
+  {
+   "criterion": "C3 calibration slope in [0.8, 1.2] and mean predicted within 1.5 points of observed",
+   "result": "slope 0.955; gap 1.96 points (after Platt on 2014: slope 0.973, gap 1.28)",
+   "pass": "False"
+  },
+  {
+   "criterion": "C4 policy return above accept-all with month-block CI excluding 0",
+   "result": "0.051 points; CI [0.042, 0.061]",
+   "pass": "True"
+  },
+  {
+   "criterion": "C5 score PSI train to test <= 0.25 and AUC in each quarter within 0.03 of the overall",
+   "result": "PSI 0.007; quarterly AUC 0.673, 0.676, 0.682, 0.683 vs overall 0.679",
+   "pass": "True"
+  },
+  {
+   "criterion": "C6 no group below 0.8 of the highest approval rate (strict policy); state and zip excluded as inputs",
+   "result": "{'income_band': {'Q1 (lowest)': 0.627}}",
+   "pass": "False"
+  }
+ ],
+ "calibration": {
+  "slope": 0.9550200278764391,
+  "intercept": 0.09355029557852874,
+  "slope_recal": 0.9732528382321594
+ },
+ "policy": {
+  "cutoff": 0.37999999999999995,
+  "accept_share": 0.99485124846616,
+  "return_policy": 0.0659896780867164,
+  "return_all": 0.06547702406815292
+ },
+ "psi": {
+  "val": 0.008615710952269873,
+  "test": 0.007072258620616149
+ }
+}

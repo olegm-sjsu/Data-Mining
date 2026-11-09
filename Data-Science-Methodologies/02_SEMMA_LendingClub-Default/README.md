@@ -7,9 +7,23 @@
 | **Target** | From `loan_status`: Charged Off or Default is 1, Fully Paid is 0. Exclude loans still open |
 | **Tools** | Python in Colab, plus a SAS demo if available |
 | **Deployment** | Batch scoring script, plus SAS score code if available |
-| **Colab** | _add badge_ |
+| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/02_SEMMA_LendingClub-Default/notebooks/semma_lending_club.ipynb) (works after the push) |
 | **Medium** | _add link_ |
 | **YouTube** | _add link_ |
+
+## Status
+
+All SEMMA stages plus the two extensions are drafted, run and reviewed (see `critic_reviews/`).
+Read [REPORT.md](REPORT.md) first. **SAS was not available**: no SAS flow, screenshots or report;
+a SAS score-code export is generated and has not been run.
+
+**Still to do by you:**
+
+- [ ] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
+- [ ] Apply for SAS Viya for Learners with your SJSU email; if access arrives, rebuild the flow and add screenshots to `artifacts/`
+- [ ] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
+- [ ] Publish `article/medium_article.md` on Medium (fill the links) and add the URL here
+- [ ] Record the YouTube walkthrough (`article/presentation.html` is the slide deck) and add the URL here
 
 ## Pitfalls to hand the LLM and check yourself
 
@@ -28,51 +42,51 @@ critic rounds per phase.
 
 ### Before Sample (extension), `00_problem_framing.md`
 
-- [ ] Short problem statement, loss assumptions, and success criteria, marked as outside SEMMA itself
+- [x] Short problem statement, loss assumptions, and success criteria, marked as outside SEMMA itself
 
 ### S: Sample, `01_sample.md`
 
-- [ ] Define the eligible population, and count what each filter removes
-- [ ] Draw a stratified sample by vintage, term, and outcome, and justify the size
-- [ ] Prove it is representative against the full eligible population (KS or PSI on numeric columns, chi-square on categorical ones)
-- [ ] Learning curve showing the sample is large enough
-- [ ] Decide how to treat imbalance. If you oversample, correct the probabilities back
-- [ ] Partition into train, validation, and an out-of-time test
+- [x] Define the eligible population, and count what each filter removes
+- [x] Draw a stratified sample by vintage, term, and outcome, and justify the size
+- [x] Prove it is representative against the full eligible population (KS or PSI on numeric columns, chi-square on categorical ones)
+- [x] Learning curve showing the sample is large enough
+- [x] Decide how to treat imbalance. If you oversample, correct the probabilities back
+- [x] Partition into train, validation, and an out-of-time test
 
 ### E: Explore, `02_explore.md`
 
-- [ ] Univariate distributions, missingness patterns, outliers
-- [ ] Default rate by grade, purpose, DTI, income, and vintage
-- [ ] Correlation and association screening, with information value per variable
-- [ ] Clustering of borrowers to look for structure, with a visualization
-- [ ] Log what each finding means for Modify
+- [x] Univariate distributions, missingness patterns, outliers
+- [x] Default rate by grade, purpose, DTI, income, and vintage
+- [x] Correlation and association screening, with information value per variable
+- [x] Clustering of borrowers to look for structure, with a visualization
+- [x] Log what each finding means for Modify
 
 ### M: Modify, `03_modify.md`
 
-- [ ] Leakage audit table covering every column
-- [ ] Impute with missing indicators, justified per variable
-- [ ] Outlier treatment by capping or binning
-- [ ] Transforms such as log income, credit history length, and WoE binning
-- [ ] Variable selection and redundancy removal
-- [ ] Everything fit on train only, in a reusable pipeline
+- [x] Leakage audit table covering every column
+- [x] Impute with missing indicators, justified per variable
+- [x] Outlier treatment by capping or binning
+- [x] Transforms such as log income, credit history length, and WoE binning
+- [x] Variable selection and redundancy removal
+- [x] Everything fit on train only, in a reusable pipeline
 
 ### M: Model, `04_model.md`
 
-- [ ] Baseline, WoE logistic scorecard, decision tree, neural network or boosted model
-- [ ] Tune on validation only
-- [ ] In SAS: rebuild the flow if available (data, partition, impute, regression, tree, neural network, model comparison) and export screenshots to `artifacts/`
+- [x] Baseline, WoE logistic scorecard, decision tree, neural network or boosted model
+- [x] Tune on validation only
+- [x] In SAS: rebuild the flow if available (data, partition, impute, regression, tree, neural network, model comparison) and export screenshots to `artifacts/`
 
 ### A: Assess, `05_assess.md`
 
-- [ ] ROC-AUC, PR-AUC, KS, Gini, decile lift table, calibration
-- [ ] Profit or loss at the chosen cutoff under your stated assumptions
-- [ ] Out-of-time test performance and stability (PSI over vintages)
-- [ ] Error slices and fairness review
-- [ ] Compare Python and SAS results if both exist, and explain any gap
-- [ ] Choose the champion model and justify it
+- [x] ROC-AUC, PR-AUC, KS, Gini, decile lift table, calibration
+- [x] Profit or loss at the chosen cutoff under your stated assumptions
+- [x] Out-of-time test performance and stability (PSI over vintages)
+- [x] Error slices and fairness review
+- [x] Compare Python and SAS results if both exist, and explain any gap
+- [x] Choose the champion model and justify it
 
 ### After Assess (extension), `06_deployment.md`
 
-- [ ] Batch scoring script in `deployment/` with input validation and SAS score code if available
-- [ ] Monitoring plan: PSI, default rate by vintage, retraining triggers
-- [ ] `REPORT.md`, including the SAS demo and report or the reason it was not possible
+- [x] Batch scoring script in `deployment/` with input validation and SAS score code if available
+- [x] Monitoring plan: PSI, default rate by vintage, retraining triggers
+- [x] `REPORT.md`, including the SAS demo and report or the reason it was not possible

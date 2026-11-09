@@ -1,0 +1,7 @@
+term,part,loans,first,last,default_rate
+36 months,test,282787,2015-01-01,2015-12-01,held out
+36 months,train,166459,2010-01-01,2013-12-01,0.1239
+36 months,val,162570,2014-01-01,2014-12-01,0.1373
+60 months,test,34382,2013-01-01,2013-12-01,held out
+60 months,train,10690,2010-05-01,2011-12-01,0.2285
+60 months,val,9897,2012-01-01,2012-12-01,0.277

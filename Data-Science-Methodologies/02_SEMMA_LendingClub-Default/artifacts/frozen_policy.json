@@ -1,0 +1,112 @@
+{
+ "frozen_at_utc": "2026-11-09T21:09:14+00:00",
+ "test_opened": false,
+ "champion_A": "LightGBM A-extended",
+ "champion_B": "LightGBM B",
+ "cutoff_pd": 0.37999999999999995,
+ "validation": {
+  "Majority (prior)": {
+   "roc_auc": 0.5,
+   "pr_auc": 0.13726841030435746,
+   "ks": 0.0,
+   "brier": 0.1186048730427842
+  },
+  "FICO-only logistic (WoE)": {
+   "roc_auc": 0.5963706618030843,
+   "pr_auc": 0.1714133857817449,
+   "ks": 0.14866415676563582,
+   "brier": 0.11680269080876605
+  },
+  "Scorecard A-core": {
+   "roc_auc": 0.6489464102146029,
+   "pr_auc": 0.21701729201344283,
+   "ks": 0.21836242739417888,
+   "brier": 0.11457094194346623,
+   "setting": "C=0.01"
+  },
+  "Scorecard A-extended": {
+   "roc_auc": 0.6641011175140701,
+   "pr_auc": 0.22934906713483627,
+   "ks": 0.24278347222769203,
+   "brier": 0.11362517499250131,
+   "setting": "C=0.01"
+  },
+  "Scorecard B": {
+   "roc_auc": 0.6812198620384605,
+   "pr_auc": 0.24060303393642635,
+   "ks": 0.26921316070821794,
+   "brier": 0.11265626198599597,
+   "setting": "C=0.01"
+  },
+  "Decision tree A-extended": {
+   "roc_auc": 0.6426451498904604,
+   "pr_auc": 0.21036677321989092,
+   "ks": 0.2127397076329675,
+   "brier": 0.11505368103238257,
+   "setting": "depth=8, leaf=200"
+  },
+  "LightGBM A-core": {
+   "roc_auc": 0.6554783730521675,
+   "pr_auc": 0.22260836853737132,
+   "ks": 0.22980134714461853,
+   "brier": 0.11417713005794018,
+   "setting": "leaves=15, min_leaf=100, trees=241"
+  },
+  "LightGBM A-extended": {
+   "roc_auc": 0.6783937134368938,
+   "pr_auc": 0.24132285087560196,
+   "ks": 0.2636444890447322,
+   "brier": 0.11275274323617218,
+   "setting": "leaves=31, min_leaf=300, trees=373"
+  },
+  "LightGBM B": {
+   "roc_auc": 0.6887947440855032,
+   "pr_auc": 0.2503592738460922,
+   "ks": 0.27553457980218754,
+   "brier": 0.1122402135731155,
+   "setting": "leaves=31, min_leaf=300, trees=264"
+  },
+  "Neural net (MLP) A-extended": {
+   "roc_auc": 0.6619218182636829,
+   "pr_auc": 0.22520457462882632,
+   "ks": 0.2374990067582155,
+   "brier": 0.11386947483713289,
+   "setting": "hidden (32, 16), early stopping"
+  }
+ },
+ "candidates_sha256": "9fa66f801ba83755",
+ "features": {
+  "A_core_num": [
+   "fico",
+   "annual_inc",
+   "loan_to_income",
+   "dti",
+   "revol_util",
+   "inq_last_6mths"
+  ],
+  "A_ext_num": [
+   "fico",
+   "annual_inc",
+   "loan_to_income",
+   "dti",
+   "revol_util",
+   "inq_last_6mths",
+   "bc_open_to_buy",
+   "total_bc_limit",
+   "tot_hi_cred_lim",
+   "acc_open_past_24mths",
+   "mort_acc",
+   "percent_bc_gt_75",
+   "num_tl_op_past_12m",
+   "mths_since_recent_bc",
+   "mo_sin_rcnt_tl",
+   "mo_sin_rcnt_rev_tl_op",
+   "mo_sin_old_rev_tl_op"
+  ],
+  "cat": [
+   "home_ownership",
+   "purpose"
+  ]
+ },
+ "seed": 42
+}

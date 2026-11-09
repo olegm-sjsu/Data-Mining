@@ -1,0 +1,7 @@
+,grade,home_ownership,purpose,verification_status,initial_list_status,addr_state
+grade,1.0,0.086,0.11,0.054,0.017,0.027
+home_ownership,0.086,1.0,0.097,0.086,0.034,0.139
+purpose,0.11,0.097,1.0,0.075,0.073,0.03
+verification_status,0.054,0.086,0.075,1.0,0.039,0.037
+initial_list_status,0.017,0.034,0.073,0.039,1.0,0.038
+addr_state,0.027,0.139,0.03,0.037,0.038,1.0

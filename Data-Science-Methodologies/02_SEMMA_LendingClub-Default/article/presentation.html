@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lending Club default: SEMMA final presentation</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--mut:#5b6573;--acc:#1f5f8b;--bad:#b3261e;--ok:#1b7a43;--line:#d9dde3}
+@media (prefers-color-scheme:dark){:root{--bg:#14181f;--fg:#e8ebf0;--mut:#9aa5b4;--acc:#6db3e0;--bad:#f2a29c;--ok:#7fd1a1;--line:#323b49}}
+*{box-sizing:border-box}html{scroll-snap-type:y mandatory}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.5 Georgia,'Iowan Old Style',serif}
+section{min-height:100vh;scroll-snap-align:start;padding:6vh max(24px,8vw);display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(28px,4.4vw,52px);line-height:1.1;margin:0 0 .4em}h2{font-size:clamp(22px,3vw,36px);margin:0 0 .6em;color:var(--acc)}
+p,li{max-width:62ch}ul{padding-left:1.2em}.mut{color:var(--mut)}img{max-width:100%;max-height:52vh;border:1px solid var(--line);border-radius:6px;background:#fff}
+table{border-collapse:collapse;margin:.6em 0;font:16px/1.4 system-ui,sans-serif}th,td{border:1px solid var(--line);padding:6px 12px;text-align:right}th:first-child,td:first-child{text-align:left}
+.bad{color:var(--bad);font-weight:600}.ok{color:var(--ok);font-weight:600}.num{font:700 clamp(36px,6vw,72px)/1 system-ui,sans-serif;color:var(--acc)}.row{display:flex;gap:32px;flex-wrap:wrap;align-items:center}
+</style></head><body>
+
+<section><h1>Which Lending Club loans will charge off?</h1><p class="mut">A SEMMA project: Sample, Explore, Modify, Model, Assess. 2.26 million loans, 2007 to 2018. Use the arrow keys or scroll.</p><p>If you can rank borrowers by risk, can you make more money by declining the risky ones?</p></section>
+
+<section><h2>Extension 0: define success first</h2><ul><li>Money measured with <b>realized cash flows</b>: total payments minus amount funded. Declined loans earn 0; undiscounted.</li><li>Six pass/fail criteria (AUC, KS, calibration, profit, stability, fairness) written before modeling.</li><li>SEMMA has no business or deployment stage: these are labelled extensions.</li></ul></section>
+
+<section><h2>S: Sample</h2><div class="row"><img src="images/S_learning_curve.png" alt="Learning curve"><ul><li>2,260,701 rows to <b>666,785</b> eligible loans.</li><li>Keep only vintages that could have finished: 36-month loans issued by Dec 2015.</li><li>Learning curve never flattens: use every training loan.</li><li>Out-of-time test: all 282,787 loans of 2015, <b>not sampled</b>.</li></ul></div></section>
+
+<section><h2>E: Explore</h2><div class="row"><img src="images/E_default_rates.png" alt="Default rates by grade, purpose, DTI, income, quarter and verification"><ul><li>Grade A 5.6% to G 30.3% default.</li><li>The credit-bureau block exists only from 2013: missingness proxies the calendar.</li><li>Borrower clusters are weak (silhouette at most 0.14).</li></ul></div></section>
+
+<section><h2>M: Modify. 41 columns know the future</h2><p>Audit of <b>all 151 columns</b>: 78 known at origination, <span class="bad">41 not</span>.</p><table><tr><th>Post-origination column</th><th>Single-column AUC</th></tr><tr><td>recoveries</td><td class="bad">0.934</td></tr><tr><td>last_fico_range_high</td><td class="bad">0.104 (= 0.896)</td></tr><tr><td>total_rec_prncp</td><td class="bad">0.170 (= 0.830)</td></tr></table><p class="mut">ZIP code and state kept out of the model (fairness proxies). Grade and rate only in a comparison model.</p></section>
+
+<section><h2>M: Model</h2><table><tr><th>Model (validation)</th><th>ROC-AUC</th></tr><tr><td>FICO only</td><td>0.596</td></tr><tr><td>Scorecard, application data</td><td>0.664</td></tr><tr><td><b>LightGBM, application + bureau (Model A)</b></td><td>0.678</td></tr><tr><td>LightGBM + Lending Club grade and rate (Model B)</td><td>0.689</td></tr></table><p>Pre-set rule picked Model A. Model B is a comparison only.</p></section>
+
+<section><h2>A: Assess, the 2015 test (once)</h2><div class="num">AUC 0.679</div><p>Pre-set target 0.68: <span class="bad">missed by 0.0007</span>. KS 0.260, Gini 0.359. Riskiest decile defaults 30.9% vs 3.4% for the safest.</p><table><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th></tr><tr><td class="bad">fail</td><td class="ok">pass</td><td class="bad">fail</td><td>pass, negligible</td><td class="ok">pass</td><td class="bad">flag</td></tr></table></section>
+
+<section><h2>The surprise: declining risky loans does not help</h2><div class="row"><img src="images/A_calibration_and_profit.png" alt="Reliability and profit by acceptance share"><ul><li>Even the riskiest decile returned <b>+1.3%</b>: rates already price risk.</li><li>Best half: return 6.6% to 7.9%, but total profit $237M to $155M.</li><li>The model <b>under-predicts 2015</b> (12.9% vs 14.9%).</li></ul></div></section>
+
+<section><h2>Fairness and limits</h2><ul><li>Strict decline-20% policy: lowest income quartile approved at <b>63%</b> of the top quartile's rate (follows real risk, still needs justification).</li><li>No protected-attribute data: slice and proxy analysis only.</li><li>Within-grade discrimination is weak (AUC 0.57 to 0.64).</li><li>SAS was not available: no SAS flow; a SAS score-code export was generated and <b>not run</b>.</li></ul></section>
+
+<section><h2>Extension: deployment and lessons</h2><ul><li>Batch scoring with input validation, checked against the notebook; monitoring that fires on the same calibration gap.</li><li>Use it for pricing and limits, not as a stand-alone decline rule.</li><li>Two AI roles (draft, review) caught that I called the test "sealed" after seeing its aggregate default rate (it is held out, not sealed), outcome-based test sampling and a KS tie bug.</li><li>Next time: tune on return per dollar, calibrate on the latest mature vintage, apply for SAS in week one.</li></ul></section>
+</body></html>

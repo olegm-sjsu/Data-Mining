@@ -1,0 +1,17 @@
+{
+ "F_TRAIN": 1.0,
+ "F_EVAL": 0.25,
+ "sample_rows": 544858,
+ "population_rows": 666785,
+ "funnel": {
+  "total": 2260701,
+  "status_blank": 33,
+  "still_open": 912569,
+  "legacy_policy": 2749,
+  "final": 1345350,
+  "joint_app": 25806,
+  "before_2010": 6529,
+  "not_matured": 646230,
+  "eligible": 666785
+ }
+}

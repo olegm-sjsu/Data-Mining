@@ -1,0 +1,10 @@
+step,rows
+All rows in the file,2260701
+status blank,-33
+"still open (Current, Late, Grace)",-912569
+legacy 'does not meet the credit policy' statuses,-2749
+"= loans with a final status of Fully Paid, Charged Off or Default",1345350
+joint applications,-25806
+issued before 2010,-6529
+"not matured by Dec 2018 (36m after Dec 2015, 60m after Dec 2013)",-646230
+= eligible population,666785

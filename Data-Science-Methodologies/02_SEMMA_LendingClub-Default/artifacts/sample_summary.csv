@@ -1,0 +1,7 @@
+term,part,sample_rows,population_rows,fraction,default_rate
+36 months,test,282787,282787,1.0,held out
+36 months,train,166459,166459,1.0,0.1239
+36 months,val,40643,162570,0.25,0.1373
+60 months,test,34382,34382,1.0,held out
+60 months,train,10690,10690,1.0,0.2285
+60 months,val,9897,9897,1.0,0.277

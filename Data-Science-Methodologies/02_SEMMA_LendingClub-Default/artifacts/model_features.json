@@ -1,0 +1,40 @@
+{
+ "A_core_num": [
+  "fico",
+  "annual_inc",
+  "loan_to_income",
+  "dti",
+  "revol_util",
+  "inq_last_6mths"
+ ],
+ "A_ext_num": [
+  "fico",
+  "annual_inc",
+  "loan_to_income",
+  "dti",
+  "revol_util",
+  "inq_last_6mths",
+  "bc_open_to_buy",
+  "total_bc_limit",
+  "tot_hi_cred_lim",
+  "acc_open_past_24mths",
+  "mort_acc",
+  "percent_bc_gt_75",
+  "num_tl_op_past_12m",
+  "mths_since_recent_bc",
+  "mo_sin_rcnt_tl",
+  "mo_sin_rcnt_rev_tl_op",
+  "mo_sin_old_rev_tl_op"
+ ],
+ "cat": [
+  "home_ownership",
+  "purpose"
+ ],
+ "lc_assessment_num": [
+  "int_rate"
+ ],
+ "lc_assessment_cat": [
+  "grade",
+  "sub_grade"
+ ]
+}

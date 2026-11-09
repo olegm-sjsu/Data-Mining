@@ -1,0 +1,33 @@
+{
+ "model": "LightGBM A-extended",
+ "cutoff_pd": 0.37999999999999995,
+ "strict_cutoff_pd": 0.18985233717295397,
+ "candidates_sha256": "9fa66f801ba83755",
+ "champion_file_sha256": "5b9d1276dcb45cdd9d72b381a40cb0c80cf3cbb3c17a3fecc6d386df2f0a741b",
+ "features": {
+  "A_ext_num": [
+   "fico",
+   "annual_inc",
+   "loan_to_income",
+   "dti",
+   "revol_util",
+   "inq_last_6mths",
+   "bc_open_to_buy",
+   "total_bc_limit",
+   "tot_hi_cred_lim",
+   "acc_open_past_24mths",
+   "mort_acc",
+   "percent_bc_gt_75",
+   "num_tl_op_past_12m",
+   "mths_since_recent_bc",
+   "mo_sin_rcnt_tl",
+   "mo_sin_rcnt_rev_tl_op",
+   "mo_sin_old_rev_tl_op"
+  ],
+  "cat": [
+   "home_ownership",
+   "purpose"
+  ]
+ },
+ "decision_rule": "accept if PD <= cutoff_pd (validation profit cutoff); decision_strict is an illustrative policy that declines the riskiest 20%"
+}

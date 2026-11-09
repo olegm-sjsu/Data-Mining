@@ -1,0 +1,152 @@
+column,classification,reason,missing_share_all_eligible,train_coverage,coverage_2013_on,single_column_auc,missing_treatment,in_A_core,in_A_extended,iv
+id,identifier,identifier,0.0,1.0,1.0,,,False,False,
+member_id,identifier,identifier,1.0,,,,,False,False,
+loan_amnt,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0094
+funded_amnt,NOT known at origination,used only to compute realized profit in Assess,0.0,1.0,1.0,0.52,,False,False,
+funded_amnt_inv,NOT known at origination,"set at funding, after the listing",0.0,,,0.52,,False,False,
+term,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,
+int_rate,Lending Club assessment,rate set by Lending Club's model,0.0,1.0,1.0,,,False,False,0.2506
+installment,Lending Club assessment,"function of amount, rate and term",0.0,1.0,1.0,,,False,False,0.004
+grade,Lending Club assessment,Lending Club's own risk grade,0.0,1.0,1.0,,,False,False,0.2288
+sub_grade,Lending Club assessment,Lending Club's own risk grade,0.0,1.0,1.0,,,False,False,0.259
+emp_title,text,"free text, very high cardinality",0.065,,,,,False,False,
+emp_length,known at origination,application or credit-bureau field at origination,0.056,0.955,0.947,,own missing bin (WoE) or missing value (trees); rare,False,False,
+home_ownership,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),True,True,0.0318
+annual_inc,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),True,True,0.0949
+verification_status,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0016
+issue_d,meta,used to partition by date; not a feature,0.0,1.0,1.0,,,False,False,
+loan_status,meta,the target,0.0,1.0,1.0,,,False,False,
+pymnt_plan,NOT known at origination,payment plan set after origination,0.0,,,,,False,False,
+url,identifier,identifier,0.0,,,,,False,False,
+desc,text,"free text, mostly empty after 2013",0.83,,,,,False,False,
+purpose,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),True,True,0.0302
+title,text,free text,0.0,,,,,False,False,
+zip_code,fairness proxy,"proxy for protected groups: kept out of the model, used for fairness review only",0.0,1.0,1.0,,,False,False,
+addr_state,fairness proxy,"proxy for protected groups: kept out of the model, used for fairness review only",0.0,1.0,1.0,,,False,False,0.0144
+dti,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),True,True,0.0408
+delinq_2yrs,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0002
+earliest_cr_line,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,
+fico_range_low,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,
+fico_range_high,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,
+inq_last_6mths,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),True,True,0.0295
+mths_since_last_delinq,known at origination,application or credit-bureau field at origination,0.517,0.416,0.457,,missing = never happened: own bin (WoE) or indicator (trees); failed the IV filter,False,False,0.0007
+mths_since_last_record,known at origination,application or credit-bureau field at origination,0.846,0.09,0.144,,missing = never happened: own bin (WoE) or indicator (trees); failed the IV filter,False,False,0.0016
+open_acc,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0007
+pub_rec,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+revol_bal,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0133
+revol_util,known at origination,application or credit-bureau field at origination,0.001,0.999,1.0,,none needed (complete),True,True,0.0383
+total_acc,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0119
+initial_list_status,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0005
+out_prncp,NOT known at origination,balance after origination,0.0,,,,,False,False,
+out_prncp_inv,NOT known at origination,balance after origination,0.0,,,,,False,False,
+total_pymnt,NOT known at origination,payments received (the outcome),0.0,1.0,1.0,0.274,,False,False,
+total_pymnt_inv,NOT known at origination,payments received (the outcome),0.0,,,0.274,,False,False,
+total_rec_prncp,NOT known at origination,principal repaid (the outcome),0.0,1.0,1.0,0.17,,False,False,
+total_rec_int,NOT known at origination,interest paid (the outcome),0.0,,,0.497,,False,False,
+total_rec_late_fee,NOT known at origination,late fees (the outcome),0.0,,,0.542,,False,False,
+recoveries,NOT known at origination,recoveries after charge-off (the outcome),0.0,1.0,1.0,0.934,,False,False,
+collection_recovery_fee,NOT known at origination,fees after charge-off (the outcome),0.0,,,0.866,,False,False,
+last_pymnt_d,NOT known at origination,last payment date,0.001,,,,,False,False,
+last_pymnt_amnt,NOT known at origination,last payment amount,0.0,,,0.234,,False,False,
+next_pymnt_d,NOT known at origination,next payment date,1.0,,,,,False,False,
+last_credit_pull_d,NOT known at origination,credit pulled after origination,0.0,,,,,False,False,
+last_fico_range_high,NOT known at origination,FICO refreshed after origination,0.0,,,0.104,,False,False,
+last_fico_range_low,NOT known at origination,FICO refreshed after origination,0.0,,,0.104,,False,False,
+collections_12_mths_ex_med,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+mths_since_last_major_derog,known at origination,application or credit-bureau field at origination,0.752,0.15,0.231,,dropped: coverage depends on the issue year and the field is not selected,False,False,0.0017
+policy_code,meta,constant,0.0,,,,,False,False,
+application_type,meta,constant after filtering,0.0,1.0,1.0,,,False,False,
+annual_inc_joint,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+dti_joint,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+verification_status_joint,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+acc_now_delinq,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+tot_coll_amt,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0001
+tot_cur_bal,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0454
+open_acc_6m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+open_act_il,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+open_il_12m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+open_il_24m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+mths_since_rcnt_il,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+total_bal_il,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+il_util,known at origination,"field introduced around 2015, absent in the training vintages",0.981,,,,excluded: absent in the training vintages,False,False,
+open_rv_12m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+open_rv_24m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+max_bal_bc,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+all_util,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+total_rev_hi_lim,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0387
+inq_fi,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+total_cu_tl,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+inq_last_12m,known at origination,"field introduced around 2015, absent in the training vintages",0.978,,,,excluded: absent in the training vintages,False,False,
+acc_open_past_24mths,known at origination,application or credit-bureau field at origination,0.061,0.828,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0433
+avg_cur_bal,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0502
+bc_open_to_buy,known at origination,application or credit-bureau field at origination,0.07,0.821,0.991,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0695
+bc_util,known at origination,application or credit-bureau field at origination,0.071,0.821,0.991,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0345
+chargeoff_within_12_mths,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+delinq_amnt,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+mo_sin_old_il_acct,known at origination,application or credit-bureau field at origination,0.125,0.697,0.959,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0144
+mo_sin_old_rev_tl_op,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0227
+mo_sin_rcnt_rev_tl_op,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0283
+mo_sin_rcnt_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0284
+mort_acc,known at origination,application or credit-bureau field at origination,0.061,0.828,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0403
+mths_since_recent_bc,known at origination,application or credit-bureau field at origination,0.07,0.822,0.992,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0318
+mths_since_recent_bc_dlq,known at origination,application or credit-bureau field at origination,0.768,0.168,0.237,,dropped: coverage depends on the issue year and the field is not selected,False,False,0.0004
+mths_since_recent_inq,known at origination,application or credit-bureau field at origination,0.162,0.731,0.892,,dropped: coverage depends on the issue year and the field is not selected,False,False,0.0306
+mths_since_recent_revol_delinq,known at origination,application or credit-bureau field at origination,0.674,0.251,0.32,,dropped: coverage depends on the issue year and the field is not selected,False,False,0.0007
+num_accts_ever_120_pd,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0003
+num_actv_bc_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0045
+num_actv_rev_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0151
+num_bc_sats,known at origination,application or credit-bureau field at origination,0.074,0.786,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0035
+num_bc_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0039
+num_il_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0083
+num_op_rev_tl,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0026
+num_rev_accts,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0013
+num_rev_tl_bal_gt_0,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0153
+num_sats,known at origination,application or credit-bureau field at origination,0.074,0.786,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0028
+num_tl_120dpd_2m,known at origination,application or credit-bureau field at origination,0.123,0.728,0.987,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0
+num_tl_30dpd,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0001
+num_tl_90g_dpd_24m,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0001
+num_tl_op_past_12m,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0327
+pct_tl_nvr_dlq,known at origination,application or credit-bureau field at origination,0.092,0.728,0.999,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0015
+percent_bc_gt_75,known at origination,application or credit-bureau field at origination,0.071,0.821,0.991,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0339
+pub_rec_bankruptcies,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+tax_liens,known at origination,application or credit-bureau field at origination,0.0,1.0,1.0,,none needed (complete),False,False,0.0
+tot_hi_cred_lim,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.056
+total_bal_ex_mort,known at origination,application or credit-bureau field at origination,0.061,0.828,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0155
+total_bc_limit,known at origination,application or credit-bureau field at origination,0.061,0.828,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,True,0.0604
+total_il_high_credit_limit,known at origination,application or credit-bureau field at origination,0.091,0.729,1.0,,"bureau block: used only in A-extended, missing bin or indicator; missingness proxies the issue year",False,False,0.0098
+revol_bal_joint,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_fico_range_low,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_fico_range_high,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_earliest_cr_line,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_inq_last_6mths,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_mort_acc,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_open_acc,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_revol_util,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_open_act_il,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_num_rev_accts,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_chargeoff_within_12_mths,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_collections_12_mths_ex_med,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+sec_app_mths_since_last_major_derog,joint,joint-application field; joint loans were removed,1.0,,,,,False,False,
+hardship_flag,NOT known at origination,"hardship or settlement program, after origination",0.0,,,,,False,False,
+hardship_type,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_reason,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_status,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+deferral_term,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_amount,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_start_date,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_end_date,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+payment_plan_start_date,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_length,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_dpd,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_loan_status,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+orig_projected_additional_accrued_interest,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_payoff_balance_amount,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+hardship_last_payment_amount,NOT known at origination,"hardship or settlement program, after origination",0.998,,,,,False,False,
+disbursement_method,NOT known at origination,set at funding,0.0,,,,,False,False,
+debt_settlement_flag,NOT known at origination,settlement after distress,0.0,,,,,False,False,
+debt_settlement_flag_date,NOT known at origination,settlement after distress,0.984,,,,,False,False,
+settlement_status,NOT known at origination,"hardship or settlement program, after origination",0.984,,,,,False,False,
+settlement_date,NOT known at origination,"hardship or settlement program, after origination",0.984,,,,,False,False,
+settlement_amount,NOT known at origination,"hardship or settlement program, after origination",0.984,,,,,False,False,
+settlement_percentage,NOT known at origination,"hardship or settlement program, after origination",0.984,,,,,False,False,
+settlement_term,NOT known at origination,"hardship or settlement program, after origination",0.984,,,,,False,False,
