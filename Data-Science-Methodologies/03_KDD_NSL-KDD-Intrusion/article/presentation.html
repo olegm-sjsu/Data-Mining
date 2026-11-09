@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NSL-KDD knowledge discovery: final presentation</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--mut:#5b6573;--acc:#1f5f8b;--bad:#b3261e;--ok:#1b7a43;--line:#d9dde3}
+@media (prefers-color-scheme:dark){:root{--bg:#14181f;--fg:#e8ebf0;--mut:#9aa5b4;--acc:#6db3e0;--bad:#f2a29c;--ok:#7fd1a1;--line:#323b49}}
+*{box-sizing:border-box}html{scroll-snap-type:y mandatory}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.5 Georgia,'Iowan Old Style',serif}
+section{min-height:100vh;scroll-snap-align:start;padding:6vh max(24px,8vw);display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(28px,4.4vw,52px);line-height:1.1;margin:0 0 .4em}h2{font-size:clamp(22px,3vw,36px);margin:0 0 .6em;color:var(--acc)}
+p,li{max-width:62ch}ul{padding-left:1.2em}.mut{color:var(--mut)}img{max-width:100%;max-height:52vh;border:1px solid var(--line);border-radius:6px;background:#fff}
+table{border-collapse:collapse;margin:.6em 0;font:16px/1.4 system-ui,sans-serif}th,td{border:1px solid var(--line);padding:6px 12px;text-align:right}th:first-child,td:first-child{text-align:left}
+.bad{color:var(--bad);font-weight:600}.ok{color:var(--ok);font-weight:600}.num{font:700 clamp(36px,6vw,72px)/1 system-ui,sans-serif;color:var(--acc)}.row{display:flex;gap:32px;flex-wrap:wrap;align-items:center}
+</style></head><body>
+
+<section><h1>Do the patterns that separate attacks from normal traffic hold for attacks never seen?</h1><p class="mut">KDD on NSL-KDD: Selection, Preprocessing, Transformation, Data Mining, Interpretation. Simulated 1998-derived traffic: no claim about modern networks. Use the arrow keys or scroll.</p></section>
+
+<section><h2>Step 1 and 2: goals first, then read the test's design</h2><ul><li>Five knowledge goals, with pass conditions where applicable, written <b>before</b> modeling.</li><li>17 attack types occur <b>only in the test</b> (29% of its attacks).</li><li>R2L: 0.8% of training, <b>12.8%</b> of the test.</li><li><code>difficulty</code> is derived from classifier behaviour: never a feature.</li></ul></section>
+
+<section><h2>Step 3 and 4: preprocessing and transformation</h2><ul><li>No missing values or duplicates; <code>num_outbound_cmds</code> constant, dropped; extreme byte counts are mostly attacks, so rows are kept.</li><li><code>log1p</code> takes src_bytes skewness from 191 to 0.31; 121 features; PCA: 23 components hold 95%.</li><li>Validation: random view R and a <b>pseudo-novel view N</b> (six whole attack types held out). Every learned step is refit inside each view.</li></ul></section>
+
+<section><h2>Step 5 to 7: mining</h2><div class="row"><img src="images/M_clusters.png" alt="PCA view of training records by category and by k-means cluster"><ul><li>k-means NMI 0.48 (train), <span class="bad">0.30</span> (test).</li><li>Rules: SYN flood and ping-sweep patterns hold on the test (0.89 to 1.00).</li><li>R2L: <span class="bad">no rule</span> at the required support.</li></ul></div></section>
+
+<section><h2>The model-selection rule, and a slip I disclose</h2><ul><li>Rule fixed in advance: macro-F1 on view R, then novel recall on view N, simpler model if intervals overlap.</li><li>My first selection code skipped the tie-break (depth-8 tree instead of depth 6). I found it by review, fixed it, and disclosed that the test had been scored once under the wrong tree.</li></ul></section>
+
+<section><h2>Step 8: the test</h2><div class="num">0.999 vs 0.780</div><p>Random-split accuracy vs <code>KDDTest+</code> accuracy. Macro-F1 0.969 vs 0.595; 0.505 on the harder KDDTest-21.</p><table><tr><th>Boosted, KDDTest+</th><th>DoS</th><th>Probe</th><th>R2L</th><th>U2R</th></tr><tr><td>Recall</td><td class="ok">0.81</td><td>0.73</td><td class="bad">0.12</td><td class="bad">0.21</td></tr></table></section>
+
+<section><h2>Why the gap?</h2><ul><li><b>Class mix:</b> weighting test recalls by the training mix gives accuracy 0.883.</li><li><b>Novel types:</b> category-correct accuracy on them is 0.287; removing them lifts accuracy to 0.879.</li><li><b>Known types shift too:</b> <code>guess_passwd</code> 53 training vs 1,231 test records; 0 found.</li></ul></section>
+
+<section><h2>Known vs novel, supervised vs anomaly</h2><div class="row"><img src="images/I_confusion.png" alt="Confusion matrices for the boosted model on KDDTest+ and KDDTest-21"><ul><li>Novel-type recall: boosted 0.386, anomaly (1% threshold) 0.100, union 0.415.</li><li>Anomaly AUC is <b>0.958</b>; post hoc, 5% false alarms would catch 67% of novel attacks.</li><li><b>0%</b> for mailbomb, snmpguess, snmpgetattack.</li></ul></div></section>
+
+<section><h2>Knowledge: real, artifact, or fragile?</h2><table><tr><th>Pattern</th><th>Verdict</th></tr><tr><td>S0 + SYN errors: SYN flood</td><td class="ok">real (but ~90% of DoS is one attack)</td></tr><tr><td>ICMP echo across many hosts: ping sweep</td><td class="ok">real</td></tr><tr><td>root_shell + telnet (U2R)</td><td>real, fragile (11 records)</td></tr><tr><td>guest FTP, large transfer (R2L)</td><td class="bad">does not transfer: warezclient absent from test</td></tr><tr><td>src_bytes importance</td><td class="bad">largely a 1998 tool artifact</td></tr></table></section>
+
+<section><h2>Step 9 (extension): deployment and monitoring</h2><ul><li>FastAPI: validated input, category, anomaly score, matched rules, model-hash check. Tested over HTTP and in Docker.</li><li><b>Monitoring lesson:</b> treating the test as a live stream, only a watch message on one feature fires, and no alert-volume trigger, although R2L recall is 12%. Only labelled feedback sees a class-mix shift.</li><li>The four knowledge goals that have pass conditions (K1 to K4) all failed them; the report says so (K5 is explanatory).</li></ul></section>
+</body></html>

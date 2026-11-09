@@ -1,0 +1,66 @@
+[
+ {
+  "category": "R2L",
+  "antecedent": [
+   "duration=low",
+   "is_guest_login=1"
+  ],
+  "length": 2,
+  "support_in_category": 0.19396984924623115,
+  "confidence": 1.0,
+  "lift": 126.60603015075375,
+  "records_matched": 193
+ },
+ {
+  "category": "R2L",
+  "antecedent": [
+   "duration=low",
+   "hot=high",
+   "service=ftp"
+  ],
+  "length": 3,
+  "support_in_category": 0.192964824120603,
+  "confidence": 1.0,
+  "lift": 126.60603015075375,
+  "records_matched": 192
+ },
+ {
+  "category": "R2L",
+  "antecedent": [
+   "dst_bytes=high",
+   "duration=low",
+   "service=ftp"
+  ],
+  "length": 3,
+  "support_in_category": 0.192964824120603,
+  "confidence": 1.0,
+  "lift": 126.60603015075375,
+  "records_matched": 192
+ },
+ {
+  "category": "R2L",
+  "antecedent": [
+   "dst_host_diff_srv_rate=low",
+   "duration=low",
+   "hot=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.192964824120603,
+  "confidence": 1.0,
+  "lift": 126.60603015075375,
+  "records_matched": 192
+ },
+ {
+  "category": "R2L",
+  "antecedent": [
+   "duration=low",
+   "service=ftp",
+   "src_bytes=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.192964824120603,
+  "confidence": 1.0,
+  "lift": 126.60603015075375,
+  "records_matched": 192
+ }
+]

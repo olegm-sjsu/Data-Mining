@@ -1,0 +1,104 @@
+{
+ "criteria": [
+  {
+   "goal and condition": "K1 k-means NMI >= 0.50 on training and >= 0.40 on KDDTest+",
+   "result": "train 0.477; test 0.304",
+   "pass": "False"
+  },
+  {
+   "goal and condition": "K2 each category has a fixed rule (train conf >= 0.90, support >= 0.20) whose test confidence >= 0.80",
+   "result": "normal: 1.0; DoS: 1.0; Probe: 1.0; R2L: none; U2R: 1.0",
+   "pass": "False"
+  },
+  {
+   "goal and condition": "K3 anomaly ROC-AUC >= 0.80 on KDDTest+ and novel-type recall >= 0.50 at the 1% threshold",
+   "result": "AUC 0.958; novel recall 0.100",
+   "pass": "False"
+  },
+  {
+   "goal and condition": "K4 macro-F1 (boosted) >= 0.55 on KDDTest+ and novel attack-vs-normal recall >= 0.40",
+   "result": "macro-F1 0.595; novel recall 0.386",
+   "pass": "False"
+  }
+ ],
+ "summary": [
+  {
+   "file": "KDDTest+",
+   "model": "baseline",
+   "accuracy": 0.7407,
+   "macro_F1": 0.5194,
+   "macro_F1_CI_low": 0.4969,
+   "macro_F1_CI_high": 0.5452,
+   "recall_normal": 0.9232,
+   "recall_DoS": 0.796,
+   "recall_Probe": 0.7043,
+   "recall_R2L": 0.0284,
+   "recall_U2R": 0.1194
+  },
+  {
+   "file": "KDDTest+",
+   "model": "tree",
+   "accuracy": 0.738,
+   "macro_F1": 0.5086,
+   "macro_F1_CI_low": 0.4881,
+   "macro_F1_CI_high": 0.5316,
+   "recall_normal": 0.9717,
+   "recall_DoS": 0.7487,
+   "recall_Probe": 0.6068,
+   "recall_R2L": 0.0492,
+   "recall_U2R": 0.0746
+  },
+  {
+   "file": "KDDTest+",
+   "model": "boosted",
+   "accuracy": 0.7803,
+   "macro_F1": 0.5953,
+   "macro_F1_CI_low": 0.5672,
+   "macro_F1_CI_high": 0.6187,
+   "recall_normal": 0.9709,
+   "recall_DoS": 0.8111,
+   "recall_Probe": 0.7257,
+   "recall_R2L": 0.1179,
+   "recall_U2R": 0.209
+  },
+  {
+   "file": "KDDTest-21",
+   "model": "baseline",
+   "accuracy": 0.5071,
+   "macro_F1": 0.4122,
+   "macro_F1_CI_low": 0.3884,
+   "macro_F1_CI_high": 0.4377,
+   "recall_normal": 0.6557,
+   "recall_DoS": 0.6496,
+   "recall_Probe": 0.7019,
+   "recall_R2L": 0.0284,
+   "recall_U2R": 0.1194
+  },
+  {
+   "file": "KDDTest-21",
+   "model": "tree",
+   "accuracy": 0.5041,
+   "macro_F1": 0.4073,
+   "macro_F1_CI_low": 0.3865,
+   "macro_F1_CI_high": 0.4304,
+   "recall_normal": 0.875,
+   "recall_DoS": 0.5739,
+   "recall_Probe": 0.6037,
+   "recall_R2L": 0.0492,
+   "recall_U2R": 0.0746
+  },
+  {
+   "file": "KDDTest-21",
+   "model": "boosted",
+   "accuracy": 0.5827,
+   "macro_F1": 0.5048,
+   "macro_F1_CI_low": 0.4809,
+   "macro_F1_CI_high": 0.5329,
+   "recall_normal": 0.8699,
+   "recall_DoS": 0.677,
+   "recall_Probe": 0.7236,
+   "recall_R2L": 0.1179,
+   "recall_U2R": 0.209
+  }
+ ]
+}

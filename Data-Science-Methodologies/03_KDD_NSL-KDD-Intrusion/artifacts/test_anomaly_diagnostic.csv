@@ -1,0 +1,5 @@
+,recall known-type,recall novel-type
+alarm rate on normal 1%,0.2714,0.3056
+alarm rate on normal 5%,0.756,0.6709
+alarm rate on normal 10%,0.8637,0.7837
+alarm rate on normal 20%,0.9987,0.976

@@ -1,0 +1,5 @@
+goal and condition,result,pass
+K1 k-means NMI >= 0.50 on training and >= 0.40 on KDDTest+,train 0.477; test 0.304,False
+"K2 each category has a fixed rule (train conf >= 0.90, support >= 0.20) whose test confidence >= 0.80",normal: 1.0; DoS: 1.0; Probe: 1.0; R2L: none; U2R: 1.0,False
+K3 anomaly ROC-AUC >= 0.80 on KDDTest+ and novel-type recall >= 0.50 at the 1% threshold,AUC 0.958; novel recall 0.100,False
+K4 macro-F1 (boosted) >= 0.55 on KDDTest+ and novel attack-vs-normal recall >= 0.40,macro-F1 0.595; novel recall 0.386,False

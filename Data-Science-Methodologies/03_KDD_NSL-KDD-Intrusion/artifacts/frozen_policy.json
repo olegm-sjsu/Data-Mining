@@ -1,0 +1,38 @@
+{
+ "frozen_at_utc": "2026-11-09T21:58:31+00:00",
+ "test_opened": false,
+ "chosen": {
+  "tree": "Tree depth 6, class_weight=None",
+  "boosted": "LightGBM leaves 15, class_weight=balanced"
+ },
+ "anomaly_detector": "pca_recon",
+ "anomaly_threshold": 20.506647098113792,
+ "bundle_sha256": "2bee09fa0946284e18c3cb19c4c8ea3a8999a3336436729c5bfd0cd1579e862b",
+ "novel_val_types": [
+  "back",
+  "teardrop",
+  "nmap",
+  "warezclient",
+  "multihop",
+  "loadmodule"
+ ],
+ "seed": 42,
+ "n_rules": 20,
+ "k1_train": {
+  "kmeans_nmi_train": 0.4768381354188122,
+  "kmeans_ari_train": 0.5069524059622815,
+  "purity": 0.8382907448421487,
+  "silhouette": {
+   "2": 0.383,
+   "3": 0.461,
+   "4": 0.478,
+   "5": 0.482,
+   "6": 0.481,
+   "8": 0.487,
+   "10": 0.502,
+   "12": 0.511
+  },
+  "dbscan_noise": 0.07590203776406805,
+  "dbscan_nmi": 0.5884122519209019
+ }
+}

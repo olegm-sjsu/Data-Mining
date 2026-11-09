@@ -1,0 +1,7 @@
+view,accuracy,macro_F1
+view R validation (random split of KDDTrain+),0.999,0.969
+KDDTest+ as is,0.7803,0.5953
+"KDDTest+, known attack types and normal only",0.8787,0.6735
+"KDDTest+, novel attack types only (accuracy = category correct)",0.2867,
+KDDTest+ per-class recall weighted by the TRAINING class mix,0.8829,
+KDDTest-21,0.5827,0.5048

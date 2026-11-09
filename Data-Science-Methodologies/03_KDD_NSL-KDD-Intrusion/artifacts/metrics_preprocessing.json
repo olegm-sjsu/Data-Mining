@@ -1,0 +1,29 @@
+{
+ "Q": {
+  "missing_values": {
+   "train": 0,
+   "test+": 0,
+   "test-21": 0
+  },
+  "duplicate_rows": {
+   "train": 0,
+   "test+": 0,
+   "test-21": 0
+  },
+  "rates_outside_0_1": 0,
+  "negative_numeric_values": 0,
+  "binary_columns_not_0_1": {},
+  "label_whitespace_or_case_issues": 0,
+  "constant_columns_in_train": [
+   "num_outbound_cmds"
+  ],
+  "near_constant_(>=99.9%_one_value)": [
+   "land",
+   "urgent",
+   "num_failed_logins",
+   "su_attempted",
+   "num_shells",
+   "is_host_login"
+  ]
+ }
+}

@@ -1,0 +1,12 @@
+model,family,R macro-F1,R accuracy,R U2R recall,N held-out attack recall,N CI low,N CI high,N false alarm rate
+Logistic regression (baseline),baseline,0.839,0.9936,0.3,0.5058,0.4926,0.5192,0.0026
+"Tree depth 4, class_weight=None",tree,0.6497,0.9786,0.0,0.2946,0.2816,0.308,0.0068
+"Tree depth 4, class_weight=balanced",tree,0.556,0.776,0.9,0.4215,0.4047,0.4365,0.1713
+"Tree depth 6, class_weight=None",tree,0.8659,0.9901,0.5,0.2934,0.2807,0.3066,0.0019
+"Tree depth 6, class_weight=balanced",tree,0.6204,0.9104,1.0,0.4375,0.4217,0.4519,0.0552
+"Tree depth 8, class_weight=None",tree,0.8732,0.995,0.6,0.295,0.2823,0.3085,0.0014
+"Tree depth 8, class_weight=balanced",tree,0.716,0.9629,0.7,0.4325,0.4175,0.4462,0.0245
+"LightGBM leaves 15, class_weight=None",boosted,0.8976,0.9991,0.5,0.3906,0.3767,0.4055,0.0003
+"LightGBM leaves 15, class_weight=balanced",boosted,0.969,0.9994,0.9,0.4316,0.4182,0.4464,0.0004
+"LightGBM leaves 31, class_weight=None",boosted,0.8729,0.9987,0.5,0.3155,0.303,0.328,0.0001
+"LightGBM leaves 31, class_weight=balanced",boosted,0.9776,0.9994,0.9,0.3817,0.3673,0.3953,0.0003

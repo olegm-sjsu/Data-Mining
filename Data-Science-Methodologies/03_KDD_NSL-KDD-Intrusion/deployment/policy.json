@@ -1,0 +1,8 @@
+{
+ "bundle_sha256": "2bee09fa0946284e18c3cb19c4c8ea3a8999a3336436729c5bfd0cd1579e862b",
+ "anomaly_threshold": 20.506647098113792,
+ "classifier": "LightGBM leaves 15, class_weight=balanced",
+ "anomaly_detector": "pca_recon",
+ "seed": 42,
+ "training_data": "NSL-KDD KDDTrain+ (125,973 connections), a 1998-derived simulation"
+}

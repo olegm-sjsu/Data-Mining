@@ -1,0 +1,6 @@
+detector,recall known-type attacks,recall novel-type attacks,false alarm rate (normal),"category correct, known","category correct, novel"
+supervised baseline,0.759,0.3107,0.0768,0.7577,0.2269
+supervised tree,0.7597,0.1787,0.0283,0.7502,0.1032
+supervised boosted,0.7864,0.3861,0.0291,0.7802,0.2867
+"anomaly (normal-only PCA reconstruction), 1% threshold from validation",0.0506,0.1,0.0059,,
+union: boosted OR anomaly alarm,0.8147,0.4155,0.0344,,

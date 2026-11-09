@@ -1,0 +1,261 @@
+[
+ {
+  "category": "normal",
+  "antecedent": [
+   "service=http",
+   "src_bytes=mid"
+  ],
+  "length": 2,
+  "support_in_category": 0.36438828089036723,
+  "confidence": 1.0,
+  "lift": 1.8706175846041906,
+  "records_matched": 24539
+ },
+ {
+  "category": "normal",
+  "antecedent": [
+   "dst_host_srv_count=high",
+   "src_bytes=mid"
+  ],
+  "length": 2,
+  "support_in_category": 0.3409560013661405,
+  "confidence": 1.0,
+  "lift": 1.8706175846041906,
+  "records_matched": 22961
+ },
+ {
+  "category": "normal",
+  "antecedent": [
+   "count=mid",
+   "src_bytes=mid"
+  ],
+  "length": 2,
+  "support_in_category": 0.23098169074736796,
+  "confidence": 1.0,
+  "lift": 1.8706175846041906,
+  "records_matched": 15555
+ },
+ {
+  "category": "normal",
+  "antecedent": [
+   "dst_host_diff_srv_rate=zero",
+   "dst_host_srv_diff_host_rate=low",
+   "service=http"
+  ],
+  "length": 3,
+  "support_in_category": 0.3669423696598013,
+  "confidence": 1.0,
+  "lift": 1.8706175846041906,
+  "records_matched": 24711
+ },
+ {
+  "category": "normal",
+  "antecedent": [
+   "dst_host_same_srv_rate=high",
+   "dst_host_srv_diff_host_rate=low",
+   "service=http"
+  ],
+  "length": 3,
+  "support_in_category": 0.3669423696598013,
+  "confidence": 1.0,
+  "lift": 1.8706175846041906,
+  "records_matched": 24711
+ },
+ {
+  "category": "DoS",
+  "antecedent": [
+   "dst_host_same_srv_rate=low",
+   "dst_host_serror_rate=high",
+   "flag=S0"
+  ],
+  "length": 3,
+  "support_in_category": 0.70394321423128,
+  "confidence": 1.0,
+  "lift": 2.742896335488928,
+  "records_matched": 32330
+ },
+ {
+  "category": "DoS",
+  "antecedent": [
+   "diff_srv_rate=low",
+   "dst_host_same_src_port_rate=zero",
+   "flag=S0"
+  ],
+  "length": 3,
+  "support_in_category": 0.6728939403836524,
+  "confidence": 1.0,
+  "lift": 2.742896335488928,
+  "records_matched": 30904
+ },
+ {
+  "category": "DoS",
+  "antecedent": [
+   "diff_srv_rate=low",
+   "dst_host_same_src_port_rate=zero",
+   "dst_host_srv_serror_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.672850393015002,
+  "confidence": 1.0,
+  "lift": 2.742896335488928,
+  "records_matched": 30902
+ },
+ {
+  "category": "DoS",
+  "antecedent": [
+   "diff_srv_rate=low",
+   "dst_host_same_src_port_rate=zero",
+   "srv_serror_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.6720229930106474,
+  "confidence": 1.0,
+  "lift": 2.742896335488928,
+  "records_matched": 30864
+ },
+ {
+  "category": "DoS",
+  "antecedent": [
+   "count=high",
+   "flag=S0",
+   "rerror_rate=zero"
+  ],
+  "length": 3,
+  "support_in_category": 0.5765453872449757,
+  "confidence": 1.0,
+  "lift": 2.742896335488928,
+  "records_matched": 26479
+ },
+ {
+  "category": "Probe",
+  "antecedent": [
+   "dst_host_same_src_port_rate=high",
+   "service=eco_i",
+   "srv_diff_host_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.2984728894989705,
+  "confidence": 1.0,
+  "lift": 10.807566918325325,
+  "records_matched": 3479
+ },
+ {
+  "category": "Probe",
+  "antecedent": [
+   "dst_host_same_srv_rate=high",
+   "service=eco_i",
+   "srv_diff_host_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.2984728894989705,
+  "confidence": 1.0,
+  "lift": 10.807566918325325,
+  "records_matched": 3479
+ },
+ {
+  "category": "Probe",
+  "antecedent": [
+   "dst_host_diff_srv_rate=zero",
+   "service=eco_i",
+   "srv_diff_host_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.2982155113246397,
+  "confidence": 1.0,
+  "lift": 10.807566918325325,
+  "records_matched": 3476
+ },
+ {
+  "category": "Probe",
+  "antecedent": [
+   "diff_srv_rate=zero",
+   "srv_count=high",
+   "srv_diff_host_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.22005833905284833,
+  "confidence": 1.0,
+  "lift": 10.807566918325325,
+  "records_matched": 2565
+ },
+ {
+  "category": "Probe",
+  "antecedent": [
+   "same_srv_rate=high",
+   "srv_count=high",
+   "srv_diff_host_rate=high"
+  ],
+  "length": 3,
+  "support_in_category": 0.22005833905284833,
+  "confidence": 1.0,
+  "lift": 10.807566918325325,
+  "records_matched": 2565
+ },
+ {
+  "category": "U2R",
+  "antecedent": [
+   "dst_host_same_src_port_rate=low",
+   "hot=mid",
+   "root_shell=positive"
+  ],
+  "length": 3,
+  "support_in_category": 0.21153846153846154,
+  "confidence": 1.0,
+  "lift": 2422.5576923076924,
+  "records_matched": 11
+ },
+ {
+  "category": "U2R",
+  "antecedent": [
+   "dst_host_same_src_port_rate=low",
+   "dst_host_same_srv_rate=high",
+   "hot=mid",
+   "service=telnet"
+  ],
+  "length": 4,
+  "support_in_category": 0.21153846153846154,
+  "confidence": 1.0,
+  "lift": 2422.5576923076924,
+  "records_matched": 11
+ },
+ {
+  "category": "U2R",
+  "antecedent": [
+   "dst_host_diff_srv_rate=zero",
+   "dst_host_same_src_port_rate=low",
+   "hot=mid",
+   "service=telnet"
+  ],
+  "length": 4,
+  "support_in_category": 0.21153846153846154,
+  "confidence": 1.0,
+  "lift": 2422.5576923076924,
+  "records_matched": 11
+ },
+ {
+  "category": "U2R",
+  "antecedent": [
+   "dst_host_same_srv_rate=high",
+   "hot=mid",
+   "service=telnet"
+  ],
+  "length": 3,
+  "support_in_category": 0.3269230769230769,
+  "confidence": 0.9444444444444444,
+  "lift": 2287.971153846154,
+  "records_matched": 18
+ },
+ {
+  "category": "U2R",
+  "antecedent": [
+   "dst_host_diff_srv_rate=zero",
+   "hot=mid",
+   "service=telnet"
+  ],
+  "length": 3,
+  "support_in_category": 0.3269230769230769,
+  "confidence": 0.9444444444444444,
+  "lift": 2287.971153846154,
+  "records_matched": 18
+ }
+]

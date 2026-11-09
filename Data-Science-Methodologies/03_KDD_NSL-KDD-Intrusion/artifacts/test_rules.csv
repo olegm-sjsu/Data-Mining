@@ -1,0 +1,26 @@
+group,category,rule,train_conf,train_lift,KDDTest+ matched,KDDTest+ confidence,KDDTest-21 matched,KDDTest-21 confidence
+fixed (pre-registered),normal,service=http AND src_bytes=mid,1.0,1.8706,4628,1.0,132,1.0
+fixed (pre-registered),normal,dst_host_srv_count=high AND src_bytes=mid,1.0,1.8706,4182,1.0,52,1.0
+fixed (pre-registered),normal,count=mid AND src_bytes=mid,1.0,1.8706,2912,1.0,43,1.0
+fixed (pre-registered),normal,dst_host_diff_srv_rate=zero AND dst_host_srv_diff_host_rate=low AND service=http,1.0,1.8706,4088,1.0,46,1.0
+fixed (pre-registered),normal,dst_host_same_srv_rate=high AND dst_host_srv_diff_host_rate=low AND service=http,1.0,1.8706,4088,1.0,46,1.0
+fixed (pre-registered),DoS,dst_host_same_srv_rate=low AND dst_host_serror_rate=high AND flag=S0,1.0,2.7429,1511,0.8915,615,0.7333
+fixed (pre-registered),DoS,diff_srv_rate=low AND dst_host_same_src_port_rate=zero AND flag=S0,1.0,2.7429,1395,1.0,423,1.0
+fixed (pre-registered),DoS,diff_srv_rate=low AND dst_host_same_src_port_rate=zero AND dst_host_srv_serror_rate=high,1.0,2.7429,1400,1.0,427,1.0
+fixed (pre-registered),DoS,diff_srv_rate=low AND dst_host_same_src_port_rate=zero AND srv_serror_rate=high,1.0,2.7429,1399,1.0,426,1.0
+fixed (pre-registered),DoS,count=high AND flag=S0 AND rerror_rate=zero,1.0,2.7429,1283,1.0,444,1.0
+fixed (pre-registered),Probe,dst_host_same_src_port_rate=high AND service=eco_i AND srv_diff_host_rate=high,1.0,10.8076,140,1.0,140,1.0
+fixed (pre-registered),Probe,dst_host_same_srv_rate=high AND service=eco_i AND srv_diff_host_rate=high,1.0,10.8076,140,1.0,140,1.0
+fixed (pre-registered),Probe,dst_host_diff_srv_rate=zero AND service=eco_i AND srv_diff_host_rate=high,1.0,10.8076,140,1.0,140,1.0
+fixed (pre-registered),Probe,diff_srv_rate=zero AND srv_count=high AND srv_diff_host_rate=high,1.0,10.8076,162,0.9938,162,0.9938
+fixed (pre-registered),Probe,same_srv_rate=high AND srv_count=high AND srv_diff_host_rate=high,1.0,10.8076,165,0.9818,165,0.9818
+fixed (pre-registered),U2R,dst_host_same_src_port_rate=low AND hot=mid AND root_shell=positive,1.0,2422.5577,10,0.6,10,0.6
+fixed (pre-registered),U2R,dst_host_same_src_port_rate=low AND dst_host_same_srv_rate=high AND hot=mid AND service=telnet,1.0,2422.5577,1,1.0,1,1.0
+fixed (pre-registered),U2R,dst_host_diff_srv_rate=zero AND dst_host_same_src_port_rate=low AND hot=mid AND service=telnet,1.0,2422.5577,0,,0,
+fixed (pre-registered),U2R,dst_host_same_srv_rate=high AND hot=mid AND service=telnet,0.9444,2287.9712,2,1.0,2,1.0
+fixed (pre-registered),U2R,dst_host_diff_srv_rate=zero AND hot=mid AND service=telnet,0.9444,2287.9712,0,,0,
+supplementary (exploratory),R2L,duration=low AND is_guest_login=1,1.0,126.606,3,1.0,3,1.0
+supplementary (exploratory),R2L,duration=low AND hot=high AND service=ftp,1.0,126.606,0,,0,
+supplementary (exploratory),R2L,dst_bytes=high AND duration=low AND service=ftp,1.0,126.606,0,,0,
+supplementary (exploratory),R2L,dst_host_diff_srv_rate=low AND duration=low AND hot=high,1.0,126.606,0,,0,
+supplementary (exploratory),R2L,duration=low AND service=ftp AND src_bytes=high,1.0,126.606,0,,0,

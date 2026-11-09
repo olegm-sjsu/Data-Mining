@@ -1,0 +1,5 @@
+file,records,role
+KDDTrain+,125973,used: the training data
+KDDTest+,22544,"used: the main test, contains attack types absent from training"
+KDDTest-21,11850,used: harder subset of KDDTest+ (11850 of its 11850 rows also appear in KDDTest+; difficulty at most 20)
+KDDTrain+_20Percent,25192,not used: a subset of KDDTrain+ (25192 of 25192 rows appear in it)

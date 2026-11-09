@@ -1,0 +1,4 @@
+,auc,recall_at_1pct_FPR,false_alarm_rate,threshold,recall_back,recall_teardrop,recall_nmap,recall_warezclient,recall_multihop,recall_loadmodule
+iforest,0.8581,0.093,0.01,0.5536,0.0052,0.1043,0.1942,0.0045,0.2857,0.1111
+pca_recon,0.9214,0.0589,0.01,20.5066,0.1056,0.139,0.002,0.018,0.4286,0.3333
+mahalanobis,0.8259,0.0643,0.01,212.6554,0.0,0.0,0.1775,0.0022,0.2857,0.4444
