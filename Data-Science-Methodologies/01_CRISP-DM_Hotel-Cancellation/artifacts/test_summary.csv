@@ -1,0 +1,4 @@
+,rows,flagged_share,precision,recall,net_benefit_per_1000,cap_binds_share_of_weeks,pr_auc,roc_auc,brier,cal_slope,base_rate_brier
+Logistic regression (chosen),24018.0,0.2216,0.7178,0.3882,1533.3292,0.65,0.7131,0.7674,0.1885,0.8794,0.244
+LightGBM (secondary),24018.0,0.225,0.7731,0.4243,2022.5456,0.5,0.7492,0.7919,0.1787,1.0347,0.244
+Lead-time rule (baseline),24018.0,0.1703,0.5083,0.2112,-159.776,0.15,0.4871,0.622,,,0.244

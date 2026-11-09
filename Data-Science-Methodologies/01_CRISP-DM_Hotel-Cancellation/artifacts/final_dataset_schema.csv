@@ -1,0 +1,33 @@
+column,dtype,role
+hotel,str,Set A
+lead_time,int64,Set A
+arrival_date_year,int64,"input only (date order, weekday)"
+arrival_date_month,str,Set A
+arrival_date_week_number,int64,Set A
+arrival_date_day_of_month,int64,Set A
+stays_in_weekend_nights,int64,Set A
+stays_in_week_nights,int64,Set A
+adults,int64,Set A
+children,float64,Set A
+babies,int64,Set A
+meal,str,Set A
+market_segment,str,Set A
+distribution_channel,str,Set A
+is_repeated_guest,int64,Set A
+previous_cancellations,int64,Set A
+previous_bookings_not_canceled,int64,Set A
+reserved_room_type,str,Set A
+customer_type,str,Set A
+agent,float64,Set A
+company,float64,Set A
+country,str,Set B
+booking_changes,int64,Set B
+assigned_room_type,str,Set B
+days_in_waiting_list,int64,Set B
+adr,float64,Set B
+required_car_parking_spaces,int64,Set B
+total_of_special_requests,int64,Set B
+deposit_type,str,Set B (flagged)
+is_canceled,int64,target
+arrival_date,datetime64[us],bookkeeping
+segment,str,bookkeeping

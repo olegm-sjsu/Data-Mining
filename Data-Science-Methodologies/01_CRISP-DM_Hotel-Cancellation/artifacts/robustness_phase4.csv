@@ -1,0 +1,4 @@
+check,rows_fit,val PR-AUC
+"main (fit, with duplicates)",71465,0.7381
+duplicates removed from fit,49673,0.6978
+cancellation-only target (val labelled the same way),71465,0.7393

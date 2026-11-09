@@ -1,0 +1,132 @@
+{
+ "criteria": [
+  {
+   "criterion": "B1 10th percentile of net benefit per 1,000 > 0 (Monte Carlo)",
+   "result": "-3640 (median 214; rule median -1007)",
+   "pass": "False"
+  },
+  {
+   "criterion": "B2 net benefit at least 15% above the lead-time rule",
+   "result": "1533 vs -160 (rule is negative on the test, so a ratio is not meaningful)",
+   "pass": "True"
+  },
+  {
+   "criterion": "B3 cap binds in at most 10% of test weeks",
+   "result": "65.0% of 20 weeks",
+   "pass": "False"
+  },
+  {
+   "criterion": "B4 median weekly aggregate error <= 0.10",
+   "result": "0.048 (0 zero-actual weeks excluded)",
+   "pass": "True"
+  },
+  {
+   "criterion": "D1 (test) LightGBM - LR PR-AUC > LR fold sd 0.056",
+   "result": "+0.0362",
+   "pass": "False"
+  },
+  {
+   "criterion": "D2 recall >= 0.30",
+   "result": "0.388 (95% CI 0.333 to 0.430)",
+   "pass": "True"
+  },
+  {
+   "criterion": "D3 precision of flagged >= 0.60",
+   "result": "0.718 (95% CI 0.637 to 0.788)",
+   "pass": "True"
+  },
+  {
+   "criterion": "D4 calibration slope in [0.8, 1.2] and Brier below base-rate",
+   "result": "slope 0.879; Brier 0.1885 vs 0.2440",
+   "pass": "True"
+  },
+  {
+   "criterion": "D5 Set A+B minus Set A test PR-AUC (reported; > 0.05 means B is post-booking)",
+   "result": "0.8459 - 0.7492 = +0.0967",
+   "pass": NaN
+  },
+  {
+   "criterion": "D6 quarterly PR-AUC within 0.05 of overall",
+   "result": "overall 0.713; 2017Q2 0.796, 2017Q3 0.538",
+   "pass": "False"
+  }
+ ],
+ "summary": {
+  "rows": {
+   "Logistic regression (chosen)": 24018.0,
+   "LightGBM (secondary)": 24018.0,
+   "Lead-time rule (baseline)": 24018.0
+  },
+  "flagged_share": {
+   "Logistic regression (chosen)": 0.2216,
+   "LightGBM (secondary)": 0.225,
+   "Lead-time rule (baseline)": 0.1703
+  },
+  "precision": {
+   "Logistic regression (chosen)": 0.7178,
+   "LightGBM (secondary)": 0.7731,
+   "Lead-time rule (baseline)": 0.5083
+  },
+  "recall": {
+   "Logistic regression (chosen)": 0.3882,
+   "LightGBM (secondary)": 0.4243,
+   "Lead-time rule (baseline)": 0.2112
+  },
+  "net_benefit_per_1000": {
+   "Logistic regression (chosen)": 1533.3292,
+   "LightGBM (secondary)": 2022.5456,
+   "Lead-time rule (baseline)": -159.776
+  },
+  "cap_binds_share_of_weeks": {
+   "Logistic regression (chosen)": 0.65,
+   "LightGBM (secondary)": 0.5,
+   "Lead-time rule (baseline)": 0.15
+  },
+  "pr_auc": {
+   "Logistic regression (chosen)": 0.7131,
+   "LightGBM (secondary)": 0.7492,
+   "Lead-time rule (baseline)": 0.4871
+  },
+  "roc_auc": {
+   "Logistic regression (chosen)": 0.7674,
+   "LightGBM (secondary)": 0.7919,
+   "Lead-time rule (baseline)": 0.622
+  },
+  "brier": {
+   "Logistic regression (chosen)": 0.1885,
+   "LightGBM (secondary)": 0.1787,
+   "Lead-time rule (baseline)": NaN
+  },
+  "cal_slope": {
+   "Logistic regression (chosen)": 0.8794,
+   "LightGBM (secondary)": 1.0347,
+   "Lead-time rule (baseline)": NaN
+  },
+  "base_rate_brier": {
+   "Logistic regression (chosen)": 0.244,
+   "LightGBM (secondary)": 0.244,
+   "Lead-time rule (baseline)": 0.244
+  }
+ },
+ "twin_free": {
+  "rows": 19131.0,
+  "flagged_share": 0.26057184674089173,
+  "precision": 0.7275827482447342,
+  "recall": 0.4498325685228823,
+  "net_benefit_per_1000": 1898.097328942554,
+  "cap_binds_share_of_weeks": 0.65
+ },
+ "d5_test": {
+  "A": 0.7492382115986392,
+  "A_plus_B": 0.84592494126922
+ },
+ "per_year": 54980.174545454545,
+ "annual_nb": 84302.70539065398,
+ "cap_table": {
+  "0.1": 854.5674077775002,
+  "0.15": 1207.2195853110168,
+  "0.25": 1533.3291697893249,
+  "0.4": 1525.5225247730868,
+  "1.0": 1525.5225247730868
+ }
+}

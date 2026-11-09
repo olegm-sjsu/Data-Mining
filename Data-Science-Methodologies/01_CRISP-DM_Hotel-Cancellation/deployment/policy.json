@@ -1,0 +1,12 @@
+{
+ "threshold": 0.55,
+ "cap": 0.25,
+ "model": "Logistic regression",
+ "model_sha256": "8c6cd3c57dfe46d8",
+ "challenger_threshold": 0.5,
+ "cost_assumptions": {
+  "s": 0.25,
+  "c": 20.0,
+  "L": 150.0
+ }
+}

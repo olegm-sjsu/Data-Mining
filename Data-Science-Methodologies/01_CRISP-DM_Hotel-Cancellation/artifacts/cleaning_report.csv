@@ -1,0 +1,9 @@
+rule,rows_affected,action
+zero guests (adults+children+babies = 0),180,drop (not a real stay)
+adr < 0,1,drop (invalid price)
+adr > 1000 (single record of 5400),1,drop (extreme outlier)
+children missing,4,impute 0 inside pipeline
+meal = Undefined,1169,merge into SC inside pipeline (same meaning per source)
+market_segment or distribution_channel = Undefined,5,keep as its own category
+zero nights (day-use or stay not recorded),645,"keep, flag `zero_nights`"
+full-row duplicates (all 32 columns),31980,keep (may be group bookings); sensitivity run in Phase 4

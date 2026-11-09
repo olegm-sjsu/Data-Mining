@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hotel non-arrival: CRISP-DM final presentation</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2430;--mut:#5b6573;--acc:#1f5f8b;--bad:#b3261e;--ok:#1b7a43;--card:#fff;--line:#d9dde3}
+@media (prefers-color-scheme:dark){:root{--bg:#14181f;--fg:#e8ebf0;--mut:#9aa5b4;--acc:#6db3e0;--bad:#f2a29c;--ok:#7fd1a1;--card:#1c222c;--line:#323b49}}
+*{box-sizing:border-box}html{scroll-snap-type:y mandatory}body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.5 Georgia,'Iowan Old Style',serif}
+section{min-height:100vh;scroll-snap-align:start;padding:6vh max(24px,8vw);display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(28px,4.4vw,52px);line-height:1.1;margin:0 0 .4em}h2{font-size:clamp(22px,3vw,36px);margin:0 0 .6em;color:var(--acc)}
+p,li{max-width:62ch}ul{padding-left:1.2em}small,.mut{color:var(--mut)}img{max-width:100%;max-height:52vh;border:1px solid var(--line);border-radius:6px;background:#fff}
+table{border-collapse:collapse;margin:.6em 0;font:16px/1.4 system-ui,sans-serif}th,td{border:1px solid var(--line);padding:6px 12px;text-align:right}th:first-child,td:first-child{text-align:left}
+.bad{color:var(--bad);font-weight:600}.ok{color:var(--ok);font-weight:600}.num{font:700 clamp(36px,6vw,72px)/1 system-ui,sans-serif;color:var(--acc)}
+.row{display:flex;gap:32px;flex-wrap:wrap;align-items:center}
+</style></head><body>
+
+<section><h1>Which hotel bookings will not arrive?</h1><p class="mut">A CRISP-DM project on the Hotel booking demand dataset (119,390 bookings, two Portuguese hotels, 2015 to 2017). Use the arrow keys or scroll.</p>
+<p>37% of bookings never become a stay. What should a hotel do about it, and would it pay?</p></section>
+
+<section><h2>1. Define success before modeling</h2><ul><li>One action: phone the guest, offer a free date change.</li><li>Assumed costs: €20 per outreach, 25% save rate, €150 lost per unrecovered non-arrival.</li><li>Break-even probability: 20 / (0.25 × 150) = <b>0.53</b>.</li><li>Ten pass/fail criteria (B1 to B4, D1 to D6) written down first.</li></ul></section>
+
+<section><h2>2. Data understanding</h2><div class="row"><img src="images/02_eda_rates.png" alt="Non-arrival rates by hotel, lead time, deposit type, segment, month and quarter"><ul><li>Lead time: 9.5% (under a week) to 81% (over a year).</li><li>Groups 60% vs Direct 15%.</li><li>28% of rows are duplicates; Non Refund is 99% non-arrival (an anomaly).</li></ul></div></section>
+
+<section><h2>3. The leak</h2><p><b>Parking space required:</b> 10.1% of arrivals, <span class="bad">0.0%</span> of non-arrivals. The data is a day-before-arrival snapshot.</p>
+<table><tr><th>Feature set</th><th>PR-AUC (rolling folds)</th></tr><tr><td>A: known at booking (used)</td><td>0.719</td></tr><tr><td>A + deposit type</td><td>0.748</td></tr><tr><td>A + B (post-booking fields)</td><td class="bad">0.845</td></tr></table><p class="mut">A model built on the last row would look brilliant and be useless when it is needed.</p></section>
+
+<section><h2>4. Validation you can trust</h2><ul><li>Split by arrival date; the final 20% (from 22 April 2017) fixed by date before analysis and opened once for predictions. <b>Disclosure:</b> aggregate test outcomes were glimpsed during early exploration; no modeling choice used them, but the test is not perfectly clean.</li><li>One scikit-learn pipeline, fit on training rows only.</li><li>Leakage tests that must pass before modeling.</li></ul></section>
+
+<section><h2>5. Modeling</h2><table><tr><th>Model</th><th>PR-AUC</th><th>Net benefit per 1,000</th></tr><tr><td>Majority</td><td>0.362</td><td>0</td></tr><tr><td>Decision tree</td><td>0.639</td><td>1,208</td></tr><tr><td>Logistic regression</td><td>0.710</td><td>1,364</td></tr><tr><td>LightGBM (tuned)</td><td>0.719</td><td>1,576</td></tr></table><p>D1 (boosted model clearly beats linear) <span class="bad">failed</span>. The pre-set rule chose logistic regression.</p></section>
+
+<section><h2>6. Test results (opened once)</h2><div class="num">1,533 vs −160</div><p>Net benefit per 1,000 bookings, model vs lead-time rule.</p>
+<table><tr><th></th><th>Precision</th><th>Recall</th><th>Criteria</th></tr><tr><td>Logistic regression</td><td>0.72</td><td>0.39</td><td><span class="ok">D2, D3, D4, D5, B4 pass</span>; <span class="bad">B1, B3, D1, D6 fail</span></td></tr></table></section>
+
+<section><h2>7. What breaks</h2><div class="row"><img src="images/05_calibration_and_threshold.png" alt="Calibration and net benefit versus threshold"><ul><li><b>Profit rests on unmeasured numbers:</b> loses money below a 19% save rate.</li><li><b>Summer collapse:</b> precision 0.90 in April, about 0.52 in July and August.</li><li><b>Fairness:</b> German guests contacted wrongly 3.1× as often as Portuguese.</li></ul></div></section>
+
+<section><h2>8. Decision</h2><ul><li><span class="bad">No-go</span> for an automated policy.</li><li><span class="ok">Conditional go</span> for a randomized pilot: about 710 flagged non-Group bookings per arm, through July and August.</li><li>LightGBM (+489 per 1,000 on the test) runs as a shadow challenger, not crowned.</li></ul></section>
+
+<section><h2>9. Deployment and monitoring</h2><ul><li>Streamlit app: single booking and CSV; pilot mode excludes Groups and assigns a 50/50 arm.</li><li>Tested headless and against the notebook: identical probabilities on 24,018 test bookings.</li><li>Monitoring: PSI drift, flagged precision (catches the summer drop that aggregate calibration missed), country false-positive rates.</li></ul></section>
+
+<section><h2>10. Lessons</h2><ul><li>Ask when each field was recorded.</li><li>Write the success criteria and seal the test first; disclose every peek.</li><li>Two AI roles (draft, review) with fresh-context critics caught leakage, protocol and arithmetic errors: scores 4 → 9+.</li><li>Next time: choose models by average fold net benefit and validate by season.</li></ul></section>
+</body></html>

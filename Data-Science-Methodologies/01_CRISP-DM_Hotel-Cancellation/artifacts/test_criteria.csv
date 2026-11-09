@@ -1,0 +1,11 @@
+criterion,result,pass
+"B1 10th percentile of net benefit per 1,000 > 0 (Monte Carlo)",-3640 (median 214; rule median -1007),False
+B2 net benefit at least 15% above the lead-time rule,"1533 vs -160 (rule is negative on the test, so a ratio is not meaningful)",True
+B3 cap binds in at most 10% of test weeks,65.0% of 20 weeks,False
+B4 median weekly aggregate error <= 0.10,0.048 (0 zero-actual weeks excluded),True
+D1 (test) LightGBM - LR PR-AUC > LR fold sd 0.056,+0.0362,False
+D2 recall >= 0.30,0.388 (95% CI 0.333 to 0.430),True
+D3 precision of flagged >= 0.60,0.718 (95% CI 0.637 to 0.788),True
+"D4 calibration slope in [0.8, 1.2] and Brier below base-rate",slope 0.879; Brier 0.1885 vs 0.2440,True
+D5 Set A+B minus Set A test PR-AUC (reported; > 0.05 means B is post-booking),0.8459 - 0.7492 = +0.0967,
+D6 quarterly PR-AUC within 0.05 of overall,"overall 0.713; 2017Q2 0.796, 2017Q3 0.538",False

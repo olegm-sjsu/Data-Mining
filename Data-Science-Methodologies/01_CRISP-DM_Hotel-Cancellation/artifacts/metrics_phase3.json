@@ -1,0 +1,96 @@
+{
+ "cleaning": [
+  {
+   "rule": "zero guests (adults+children+babies = 0)",
+   "rows_affected": 180,
+   "action": "drop (not a real stay)"
+  },
+  {
+   "rule": "adr < 0",
+   "rows_affected": 1,
+   "action": "drop (invalid price)"
+  },
+  {
+   "rule": "adr > 1000 (single record of 5400)",
+   "rows_affected": 1,
+   "action": "drop (extreme outlier)"
+  },
+  {
+   "rule": "children missing",
+   "rows_affected": 4,
+   "action": "impute 0 inside pipeline"
+  },
+  {
+   "rule": "meal = Undefined",
+   "rows_affected": 1169,
+   "action": "merge into SC inside pipeline (same meaning per source)"
+  },
+  {
+   "rule": "market_segment or distribution_channel = Undefined",
+   "rows_affected": 5,
+   "action": "keep as its own category"
+  },
+  {
+   "rule": "zero nights (day-use or stay not recorded)",
+   "rows_affected": 645,
+   "action": "keep, flag `zero_nights`"
+  },
+  {
+   "rule": "full-row duplicates (all 32 columns)",
+   "rows_affected": 31980,
+   "action": "keep (may be group bookings); sensitivity run in Phase 4"
+  }
+ ],
+ "split": [
+  {
+   "segment": "fit",
+   "rows": "71465",
+   "from": "2015-07-01",
+   "to": "2016-11-06",
+   "non_arrival_rate": "0.3638"
+  },
+  {
+   "segment": "cal",
+   "rows": "11854",
+   "from": "2016-11-07",
+   "to": "2017-02-09",
+   "non_arrival_rate": "0.3408"
+  },
+  {
+   "segment": "val",
+   "rows": "11871",
+   "from": "2017-02-10",
+   "to": "2017-04-21",
+   "non_arrival_rate": "0.3634"
+  },
+  {
+   "segment": "test",
+   "rows": "24018",
+   "from": "2017-04-22",
+   "to": "2017-08-31",
+   "non_arrival_rate": "sealed"
+  }
+ ],
+ "twins": {
+  "test_rows": 24018,
+  "exact_twin_in_pre_test": 0,
+  "profile_twin_in_pre_test": 4887,
+  "profile_twin_share": 0.203
+ },
+ "desc": {
+  "rows": 119208,
+  "columns": 32,
+  "set_A_raw_columns": 21,
+  "set_A_model_features": 27,
+  "set_B_raw_columns": 7,
+  "target_rate_dev": 0.3609,
+  "rows_removed": 182
+ },
+ "cut_dates": {
+  "0.4": "2016-06-21",
+  "0.5": "2016-09-06",
+  "0.6": "2016-11-07",
+  "0.7": "2017-02-10",
+  "0.8": "2017-04-22"
+ }
+}

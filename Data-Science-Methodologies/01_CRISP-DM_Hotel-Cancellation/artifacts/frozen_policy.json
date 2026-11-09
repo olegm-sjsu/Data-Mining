@@ -1,0 +1,108 @@
+{
+ "frozen_at_utc": "2026-11-09T20:07:58+00:00",
+ "test_opened": false,
+ "chosen_model": "Logistic regression",
+ "calibration": "none",
+ "threshold": 0.55,
+ "cap": 0.25,
+ "rule_tau_lead_time": 226.0,
+ "lgbm_params": {
+  "num_leaves": 15,
+  "min_child_samples": 100,
+  "learning_rate": 0.05,
+  "n_estimators": 300
+ },
+ "use_cluster": false,
+ "feature_set": "A",
+ "num_features": [
+  "lead_time",
+  "log_lead_time",
+  "arrival_date_week_number",
+  "arrival_date_day_of_month",
+  "stays_in_weekend_nights",
+  "stays_in_week_nights",
+  "total_nights",
+  "adults",
+  "children",
+  "babies",
+  "total_guests",
+  "previous_cancellations",
+  "previous_bookings_not_canceled",
+  "arrival_weekday",
+  "is_repeated_guest",
+  "has_children",
+  "has_agent",
+  "has_company",
+  "zero_nights"
+ ],
+ "cat_features": [
+  "hotel",
+  "arrival_month",
+  "meal",
+  "market_segment",
+  "distribution_channel",
+  "reserved_room_type",
+  "customer_type",
+  "agent_id"
+ ],
+ "seed": 42,
+ "cost_assumptions": {
+  "s": 0.25,
+  "c": 20.0,
+  "L": 150.0
+ },
+ "cut_dates": {
+  "0.4": "2016-06-21",
+  "0.5": "2016-09-06",
+  "0.6": "2016-11-07",
+  "0.7": "2017-02-10",
+  "0.8": "2017-04-22"
+ },
+ "model_sha256": "8c6cd3c57dfe46d8",
+ "gate_validation": {
+  "D1 (rolling CV: LightGBM - LR PR-AUC > LR sd)": false,
+  "D2 recall at threshold >= 0.30 (validation)": true,
+  "D3 precision of flagged >= 0.60 (validation)": true,
+  "D4a calibration slope in [0.8, 1.2] (validation)": true,
+  "D4b Brier below base-rate predictor (validation)": true
+ },
+ "validation_candidates": {
+  "Logistic regression": {
+   "calibration": "none",
+   "thr": 0.55,
+   "slope": 0.9573454343189024,
+   "pr_auc": 0.7309364407753407,
+   "brier": 0.16992753799618704,
+   "flagged_share": 0.20200488585628842,
+   "precision": 0.7677231025854879,
+   "recall": 0.42675011590171535,
+   "net_benefit_per_1000": 1775.5454468873727,
+   "cap_binds_share_of_weeks": 0.2727272727272727
+  },
+  "LightGBM (tuned)": {
+   "calibration": "none",
+   "thr": 0.5,
+   "slope": 1.112046502717779,
+   "pr_auc": 0.7381153717547617,
+   "brier": 0.16426589935018274,
+   "flagged_share": 0.2004043467273187,
+   "precision": 0.7671290458175704,
+   "recall": 0.423041261010663,
+   "net_benefit_per_1000": 1757.0128885519334,
+   "cap_binds_share_of_weeks": 0.18181818181818182
+  }
+ },
+ "validation_rule": {
+  "flagged_share": 0.06073624799932609,
+  "precision": 0.6920943134535368,
+  "recall": 0.11566991191469633,
+  "net_benefit_per_1000": 361.5954847948783,
+  "cap_binds_share_of_weeks": 0.0
+ },
+ "secondary_model": {
+  "name": "LightGBM (tuned)",
+  "threshold": 0.5,
+  "calibration": "none",
+  "sha256": "64d4a886528f3d6f"
+ }
+}

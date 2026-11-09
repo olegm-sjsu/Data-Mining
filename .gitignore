@@ -26,3 +26,6 @@ HW1/Part 2/01_nyc_taxi_trip_prediction/processed_data/
 HW1/Part 2/04_associative_pattern_mining/artifacts/.cache/
 HW1/Part 2/05_data_science_skills_lab/webapp/data/creditcard.csv
 HW1/Part 2/05_data_science_skills_lab/webapp/data/online_retail.xlsx
+
+# Methodologies assignment: downloaded datasets stay out of git
+Data-Science-Methodologies/*/data/
