@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beyond Self-Attention in Audio AI: Masked Spectrograms, Mamba & xLSTM</title>
+<style>
+  :root {
+    --bg: #fbfcfe;
+    --navy: #0f172a;
+    --slate: #475569;
+    --teal: #0d9488;
+    --teal-bg: #f0fdfa;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --indigo: #4f46e5;
+    --indigo-bg: #eef2ff;
+    --card: #ffffff;
+    --border: #cbd5e1;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--navy);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  html { scroll-snap-type: y mandatory; }
+  @page {
+    size: 13.333in 7.5in;
+    margin: 0;
+  }
+  .slide {
+    width: 100vw;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    padding: 36px 56px 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-top: 6px solid var(--teal);
+    background: var(--bg);
+    page-break-after: always;
+    break-after: page;
+  }
+  @media print {
+    .slide {
+      width: 13.333in;
+      height: 7.5in;
+      min-height: 7.5in;
+      max-height: 7.5in;
+      overflow: hidden;
+    }
+  }
+  .slide.title-slide {
+    background: var(--navy);
+    color: #ffffff;
+    border-top: none;
+    border-left: 16px solid var(--teal);
+    justify-content: center;
+    padding: 56px 76px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 6px;
+  }
+  .title-slide .tag { color: #5eead4; font-size: 14px; margin-bottom: 14px; }
+  h1 {
+    font-size: 46px;
+    line-height: 1.12;
+    margin: 0 0 18px;
+    font-weight: 800;
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 1.18;
+    margin: 0 0 6px;
+    color: var(--navy);
+    font-weight: 800;
+  }
+  .sub {
+    font-size: 15.5px;
+    color: var(--slate);
+    margin: 0 0 18px;
+  }
+  .title-slide .sub {
+    font-size: 19px;
+    color: #cbd5e1;
+    max-width: 820px;
+    line-height: 1.45;
+    margin-bottom: 36px;
+  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .card.teal { background: var(--teal-bg); border-color: var(--teal); }
+  .card.amber { background: var(--amber-bg); border-color: var(--amber); }
+  .card.indigo { background: var(--indigo-bg); border-color: var(--indigo); }
+  .card.dark { background: #1e293b; border-color: var(--teal); color: #e2e8f0; }
+  .card h3 { margin: 0 0 10px; font-size: 17.5px; font-weight: 700; }
+  .card.teal h3 { color: var(--teal); }
+  .card.amber h3 { color: var(--amber); }
+  .card.indigo h3 { color: var(--indigo); }
+  .card.dark h3 { color: #5eead4; margin-bottom: 6px; }
+  ul { margin: 0; padding-left: 18px; }
+  li { margin-bottom: 8px; font-size: 14.5px; line-height: 1.42; }
+  .fig-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  .fig-wrap img {
+    max-width: 100%;
+    max-height: 5.25in;
+    object-fit: contain;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+  }
+  .footer {
+    position: absolute;
+    bottom: 14px;
+    left: 56px;
+    right: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .mt-16 { margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<section class="slide title-slide">
+  <div class="tag">CMPE 255 Data Mining • Research Short Story</div>
+  <h1>Beyond Self-Attention in Audio AI:<br>Masked Spectrograms, Mamba &amp; xLSTM</h1>
+  <p class="sub">A multi-survey walkthrough centered on Yadav, Theodoridis &amp; Tan (2025, arXiv:2509.18691), synthesizing Liu et al. (2022), Triantafyllopoulos et al. (2025), Su et al. (2025), and Mousavi et al. (2025).</p>
+  <div class="grid-3">
+    <div class="card dark"><h3>4.8M vs. 85.7M</h3><p style="margin:0;font-size:14px">Mamba SSAM-Tiny beats SSAST-Base by +6.8 HEAR pts</p></div>
+    <div class="card dark" style="border-color:var(--amber)"><h3 style="color:#fcd34d">10 HEAR Tasks</h3><p style="margin:0;font-size:14px">Music, pitch, speech &amp; environmental sound benchmark</p></div>
+    <div class="card dark" style="border-color:var(--indigo)"><h3 style="color:#a5b4fc">O(N) vs. O(N²)</h3><p style="margin:0;font-size:14px">Linear recurrent scaling challenges Transformer attention</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="tag">1. Motivation</div>
+  <h2>Why Sound Breaks Standard Deep Learning Assumptions</h2>
+  <p class="sub">General-purpose audio requires both local transient precision and global harmonic context.</p>
+  <div class="grid-2">
+    <div class="card indigo">
+      <h3>The Label Bottleneck in Audio</h3>
+      <ul>
+        <li>AudioSet spans 2M clips / 527 classes, yet real sound mixes speech, music, and noise simultaneously.</li>
+        <li>Self-Supervised Learning (SSL) invents pretext tasks from raw audio without manual tags.</li>
+        <li>Early speech SSL (wav2vec 2.0, HuBERT) focuses on short 1D windows — strong for phonemes, weak on music &amp; scenes.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>The Transformer Scaling Tax</h3>
+      <ul>
+        <li>Scaled Dot-Product Attention (SDPA) costs <b>O(N²)</b> time &amp; memory with sequence length N.</li>
+        <li>Storing the full Key-Value (KV) cache bloats memory on long clips.</li>
+        <li>Global attention mixes every patch equally, diluting local cues like drum hits or consonant bursts.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card teal mt-16">
+    <h3>The Core Research Question (Yadav et al., 2025)</h3>
+    <ul>
+      <li>Can linear-time recurrent architectures — <b>Mamba (Selective SSMs)</b> and <b>xLSTM (Extended LSTM)</b> — outperform Transformers in Masked Spectrogram Modeling?</li>
+      <li>And crucially: how do we compare them fairly without Transformer-specific shortcuts?</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>2 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">2. Survey Context</div>
+  <h2>Multi-Survey Landscape: Where Masked Spectrograms Fit</h2>
+  <p class="sub">Synthesizing Liu et al. (2022), Triantafyllopoulos et al. (2025), Mousavi et al. (2025), and Yadav et al. (2025).</p>
+  <div class="fig-wrap"><img src="../figures/01_audio_ssl_survey_taxonomy.png" alt="Audio SSL Survey Taxonomy"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>3 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">3. MSM Mechanics</div>
+  <h2>Masked Spectrogram Modeling: Sound as a 2D Puzzle</h2>
+  <p class="sub">Why audio masks 50–80% of patches (vs. BERT's 15%) and how patch geometry shapes representations.</p>
+  <div class="grid-3">
+    <div class="card indigo">
+      <h3>1. Patchifying Sound</h3>
+      <ul>
+        <li>Convert 16 kHz audio into log-mel spectrogram (2s clip → 200 frames × 80 bins).</li>
+        <li>Slice into non-overlapping <i>t × f</i> patches to prevent edge leakage.</li>
+        <li>Square (16×16): neutral time-freq.</li>
+        <li>Rectangular (4×16, default): sharper time resolution (250 patches/2s).</li>
+        <li>Frame-wise (1×F): max time precision for keyword spotting.</li>
+      </ul>
+    </div>
+    <div class="card teal">
+      <h3>2. High Masking Ratios</h3>
+      <ul>
+        <li>Text is dense → BERT masks 15%.</li>
+        <li>Spectrograms are spatially redundant across adjacent bins &amp; frames.</li>
+        <li>Masking 15% allows trivial local interpolation.</li>
+        <li>MSMs mask 50% (SSAST/SSAM) up to 75–80% (BEATs, AudioMAE, Dasheng).</li>
+        <li><i>Dasheng</i> (2024) uses grouped 80ms masking to stop STFT window overlap leakage.</li>
+      </ul>
+    </div>
+    <div class="card amber">
+      <h3>3. Reconstruction Loss</h3>
+      <ul>
+        <li>Encoder sees partial view; decoder predicts missing patches.</li>
+        <li>MSE computed <b>only on masked patches</b> outperforms full-spectrogram MSE.</li>
+        <li>Decoder is discarded after pretraining.</li>
+        <li>Variants add InfoNCE contrastive loss (orig. SSAST) or discrete codebook targets (BEATs).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>4 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">4. Framework Choice</div>
+  <h2>The Hidden Architectural Catch: MAE-Style vs. SSAST-Style</h2>
+  <p class="sub">MAE's token-dropping shortcut is Transformer-locked — SSAST creates the only fair arena.</p>
+  <div class="fig-wrap"><img src="../figures/02_ssast_vs_mae_architecture.png" alt="MAE vs SSAST"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>5 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">5. Sequence Backbones</div>
+  <h2>Under the Hood: Transformer vs. Mamba vs. xLSTM</h2>
+  <p class="sub">Three fundamentally different ways to mix information across 250 spectrogram patches.</p>
+  <div class="fig-wrap"><img src="../figures/03_transformers_vs_mamba_vs_xlstm.png" alt="Transformer vs Mamba vs xLSTM"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>6 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">6. Gist &amp; Intuition</div>
+  <h2>How Mamba and xLSTM Fix Classical Recurrence</h2>
+  <p class="sub">Skip the heavy equations — here is the engineering intuition behind both challengers.</p>
+  <div class="grid-2">
+    <div class="card teal">
+      <h3>Mamba (S6) → SSAM: Content-Aware State Spaces</h3>
+      <ul>
+        <li>Earlier S4 models used fixed matrices — unable to dynamically select relevant context.</li>
+        <li>Mamba makes parameters <b>Δ, B, C</b> functions of the current input patch.</li>
+        <li><b>Δ acts as an adaptive focus/forget knob:</b> large Δ resets state for a new event; small Δ preserves context across silence.</li>
+        <li>Hardware-aware parallel scan executes inside fast GPU SRAM.</li>
+        <li>Result: O(N) scaling, zero KV cache, strong noise resilience.</li>
+      </ul>
+    </div>
+    <div class="card amber">
+      <h3>xLSTM (mLSTM) → AxLSTM: Matrix Key-Value Memory</h3>
+      <ul>
+        <li>Classical LSTMs suffered from scalar memory bottlenecks, squashing sigmoids, and sequential hidden-hidden mixing.</li>
+        <li>Exponential gating + log stabilizer lets xLSTM decisively revise stored values.</li>
+        <li>mLSTM upgrades the scalar cell to a <b>d × d matrix memory</b> via key-value outer products.</li>
+        <li>Removing hidden-hidden mixing lets ViL-style mLSTM train in parallel.</li>
+        <li>Result: High associative capacity suited for music &amp; harmonic pitch.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>7 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">7. Benchmark Design</div>
+  <h2>Experimental Setup: Fair, Depth-Matched, and Reproducible</h2>
+  <p class="sub">AudioSet pretraining + 10-task HEAR benchmark evaluation protocol (Yadav et al., 2025).</p>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Unified Pretraining Controls</h3>
+      <ul>
+        <li>Dataset: AudioSet (~2M clips, &gt;5,000 hrs), 2s random crops, no augmentations.</li>
+        <li>Patches: 4×16 (250 patches), 50% unstructured random mask, masked-patch MSE.</li>
+        <li>Depth Control: <b>l = 12 blocks</b> across Tiny/Small/Base; Ef = 3 for Mamba &amp; xLSTM (fewer params than SSAST).</li>
+        <li>Unidirectional only: Bi-directional scans did NOT improve performance.</li>
+      </ul>
+    </div>
+    <div class="card indigo">
+      <h3>HEAR Evaluation &amp; Normalized Metric s(m)</h3>
+      <ul>
+        <li>Frozen representations: mean-pooled over 2s chunks → 1-hidden-layer MLP (1,024 neurons), 10 runs + 95% CIs.</li>
+        <li>Measures pure out-of-the-box representation quality without parameter-heavy fine-tuning.</li>
+        <li>Aggregated Score <b>s(m) ∈ [0, 100]</b> averages min-max normalized scores across all 10 tasks.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card teal mt-16">
+    <h3>The 10 Diverse HEAR Tasks (Table I)</h3>
+    <ul>
+      <li><b>Music &amp; Pitch (4):</b> Beijing Opera (BO), Mridangam Stroke (Mri-S), Mridangam Tonic (Mri-T), NSynth Pitch 5h (NS-5h, 88 cls).</li>
+      <li><b>Speech (4):</b> Crema-D Emotion (CD), LibriCount Speakers (LC), SpeechCommands 5h (SC-5h), VoxLingua107 ID (VL).</li>
+      <li><b>General Audio (2):</b> ESC-50 Environmental Sound (E50, 50 cls), FSD50K Multilabel Tagging (F50K, 200 cls, 100 hrs).</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>8 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">8. Main Results</div>
+  <h2>Headline Results: Mamba &amp; xLSTM Outperform Comparable Transformers</h2>
+  <p class="sub">SSAM-Tiny (4.8M) beats SSAST-Base (85.7M); SSAM-Base (87.9) beats AudioMAE, MSM-MAE &amp; BEATs-iter3.</p>
+  <div class="fig-wrap"><img src="../figures/04_hear_benchmark_overall_scores.png" alt="HEAR Overall Scores"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>9 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">9. Domain Nuances</div>
+  <h2>Different Architectures, Different Ears: 10-Task Breakdown</h2>
+  <p class="sub">Mamba (SSAM) excels on Speech &amp; General Audio; xLSTM (AxLSTM) leads Music &amp; Pitch.</p>
+  <div class="fig-wrap"><img src="../figures/05_task_domain_heatmap.png" alt="10-Task Heatmap"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>10 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">10. Ablation Studies</div>
+  <h2>Ablations: Resolution Sensitivity &amp; Sequence-Length Scaling</h2>
+  <p class="sub">Mamba relies on fine time steps (−17.6 pts when coarsened); xLSTM hits GPU OOM at 10 seconds.</p>
+  <div class="fig-wrap"><img src="../figures/06_ablation_patch_and_duration.png" alt="Ablation Studies"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>11 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">11. Scaling Efficiency</div>
+  <h2>Parameter Efficiency Frontier: Scaling Tiny → Small → Base</h2>
+  <p class="sub">Mamba and xLSTM shift the accuracy-per-megabyte curve dramatically upward and left.</p>
+  <div class="fig-wrap"><img src="../figures/07_efficiency_vs_accuracy_tradeoff.png" alt="Parameter Efficiency Frontier"></div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>12 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">12. Beyond Backbones</div>
+  <h2>Cross-Survey Synthesis: Pretraining Targets Matter Too</h2>
+  <p class="sub">Integrating Mousavi et al. (2025), Dinkel et al. (2024 Dasheng), and Su et al. (2025 Audio-LLMs).</p>
+  <div class="grid-3">
+    <div class="card teal">
+      <h3>Continuous Patch MSE</h3>
+      <ul>
+        <li>Models: AudioMAE, MSM-MAE, SSAM, AxLSTM, Dasheng.</li>
+        <li>Pros: Zero tokenizer overhead; scales to 1.2B params &amp; 272k hrs (Dasheng).</li>
+        <li>Cons: May spend capacity on background noise.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Hybrid Contrastive + MSE</h3>
+      <ul>
+        <li>Models: Original SSAST (2022), MAE-AST.</li>
+        <li>Pros: Adds discriminative InfoNCE signal alongside reconstruction.</li>
+        <li>Cons: Extra negative-sampling &amp; loss weighting tuning.</li>
+      </ul>
+    </div>
+    <div class="card indigo">
+      <h3>Discrete Codebook Tokens</h3>
+      <ul>
+        <li>Models: BEATs, HuBERT (Mousavi et al., 2025).</li>
+        <li>Pros: Discards low-level noise; strong semantics (BEATs = 85.9).</li>
+        <li>Cons: Iterative multi-stage tokenizer training overhead.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card indigo mt-16">
+    <h3>The Unexplored Opportunity for Tier-2 Audio-LLMs (Su et al., 2025)</h3>
+    <ul>
+      <li>Most Audio-LLMs plug in Whisper or Transformer-MAE encoders. Pairing linear-time Mamba/xLSTM encoders with BEATs-style semantic targets could dramatically cut compute on long audio streams.</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>13 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">13. My Two Cents</div>
+  <h2>Critical Reflections: What the Benchmarks Don't Shout</h2>
+  <p class="sub">Four grounded takeaways and caveats from reading across the audio SSL literature.</p>
+  <div class="grid-2">
+    <div class="card teal">
+      <h3>1. Frozen Probing ≠ Fine-Tuning</h3>
+      <ul><li>HEAR tests frozen 2s mean-pooled embeddings + 1-layer MLP. That exposes out-of-the-box features, yet severely penalizes AudioMAE (63.1 frozen vs. strong end-to-end fine-tuning).</li></ul>
+    </div>
+    <div class="card indigo">
+      <h3>2. MAE's 4× Compute Lock-In</h3>
+      <ul><li>MAE Transformers drop 75–80% of tokens during pretraining. Mamba &amp; xLSTM cannot drop patches without breaking sequence order—keeping MAE Transformers cheaper at 1B+ scale for now.</li></ul>
+    </div>
+    <div class="card amber">
+      <h3>3. Don't Blindly Copy Vision Bi-Dir</h3>
+      <ul><li>Unlike Vision Mamba/ViL, Yadav et al. found bidirectional scans did NOT improve audio MSMs. Spectrograms have a causal time arrow; reverse passes can waste compute.</li></ul>
+    </div>
+    <div class="card">
+      <h3>4. The Endgame Is Hybrid Local-Global</h3>
+      <ul><li>Top Base models are MWMAE-Base (89.4, local-global windows) and SSAM-Base (87.9, selective SSM). Combining SSM sweeps with windowed attention + Tiled Flash kernels is the clearest path forward.</li></ul>
+    </div>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>14 / 15</span></div>
+</section>
+
+<section class="slide">
+  <div class="tag">14. Summary</div>
+  <h2>Practitioner Decision Guide &amp; Key References</h2>
+  <p class="sub">Choosing the right Tier-1 audio representation architecture for your constraints.</p>
+  <div class="card teal">
+    <h3>Quick Selection Matrix</h3>
+    <ul>
+      <li><b>Edge / Tiny Budget (&lt;20M params, speech &amp; general audio):</b> Mamba SSAM-Tiny/Small (75.0–82.8 s(m), O(N), keep t ≤ 4 frames).</li>
+      <li><b>Music, Pitch &amp; Harmonic Tasks:</b> xLSTM AxLSTM (71.4 on NSynth Pitch; verify memory kernels past 5s).</li>
+      <li><b>Max Accuracy + Fast Pretraining at Scale:</b> MAE-style Local-Global Attention (MWMAE-Base 89.4 / Large 92.6) or grouped-mask Dasheng.</li>
+    </ul>
+  </div>
+  <div class="card mt-16">
+    <h3>Core Surveys &amp; Landmark Papers Synthesized</h3>
+    <ul>
+      <li>Yadav, Theodoridis &amp; Tan (2025). <i>An overview of neural architectures for SSL audio representation from masked spectrograms</i>. arXiv:2509.18691.</li>
+      <li>Triantafyllopoulos et al. (2025). <i>Computer Audition: From Task-Specific ML to Foundation Models</i>. Proc. IEEE (arXiv:2407.15672).</li>
+      <li>Liu et al. (2022). <i>Audio Self-supervised Learning: A Survey</i> (Patterns, arXiv:2203.01205) | Ericsson et al. (2022). IEEE SPM (arXiv:2110.09327).</li>
+      <li>Su et al. (2025). <i>Audio-Language Models Survey</i> (arXiv:2501.15177) | Mousavi et al. (2025). <i>Discrete Audio Tokens</i> (arXiv:2506.10274).</li>
+      <li>Foundational Models: SSAST ('22), AudioMAE ('22), BEATs ('23), Mamba ('23), MWMAE ('24), Dasheng ('24), xLSTM ('24).</li>
+    </ul>
+  </div>
+  <div class="footer"><span>CMPE 255 Short Story | Masked Spectrogram Audio SSL</span><span>15 / 15</span></div>
+</section>
+
+<script>
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+    window.scrollBy({top: window.innerHeight, behavior: 'smooth'});
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    window.scrollBy({top: -window.innerHeight, behavior: 'smooth'});
+  }
+});
+</script>
+</body>
+</html>
