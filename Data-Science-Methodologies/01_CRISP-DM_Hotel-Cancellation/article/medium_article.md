@@ -3,7 +3,7 @@
 *A CRISP-DM walkthrough with a failed pilot-readiness test, a leaky dataset and
 two AI reviewers who would not let me cut corners.*
 
-**[Links to add: Colab notebook · GitHub repo · live app · walkthrough video]**
+**[Colab notebook](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/01_CRISP-DM_Hotel-Cancellation/notebooks/crisp_dm_hotel_bookings.ipynb) · [GitHub repo](https://github.com/olegm-sjsu/Data-Mining/tree/main/Data-Science-Methodologies/01_CRISP-DM_Hotel-Cancellation) · [Walkthrough video](https://youtu.be/sFLikESPdSA)**
 
 About 37% of hotel bookings never turn into a stay. If a revenue manager knew
 which ones, they could phone those guests, offer a free date change, and save
@@ -102,5 +102,5 @@ Choose models by average fold-level *net benefit* instead of one validation
 segment; validate by season; seal the test set in code before looking at any
 outcome; and read the dataset paper's field definitions on day one.
 
-*All code, notes and reviews: [GitHub link]. The assumed costs are examples, not
+*All code, notes and reviews: [GitHub repository](https://github.com/olegm-sjsu/Data-Mining/tree/main/Data-Science-Methodologies/01_CRISP-DM_Hotel-Cancellation). The assumed costs are examples, not
 hotel data.*

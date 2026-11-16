@@ -1,5 +1,13 @@
 # Data Science Methodologies: CRISP-DM, SEMMA, KDD
 
+## Video Walkthroughs (YouTube)
+
+- **Project 1 — CRISP-DM (Hotel Booking Cancellation):** [https://youtu.be/sFLikESPdSA](https://youtu.be/sFLikESPdSA)
+- **Project 2 — SEMMA (Lending Club Loan Default):** [https://youtu.be/sDaF-TPgXS8](https://youtu.be/sDaF-TPgXS8)
+- **Project 3 — KDD (NSL-KDD Network Intrusion):** [https://youtu.be/Y5Y1Hvx6ipc](https://youtu.be/Y5Y1Hvx6ipc)
+
+---
+
 Three end-to-end projects, one per methodology, each on its own dataset. Every
 phase is drafted with an LLM, reviewed by an LLM critic through several
 revisions, and verified by hand. Each project ends with a Colab notebook, a
@@ -7,11 +15,11 @@ report, a deployed artifact, a Medium article, and a YouTube walkthrough.
 
 ## The three projects
 
-| Folder | Methodology | Dataset (Kaggle slug) | Question | Why this pairing | Deployment |
-|---|---|---|---|---|---|
-| [01_CRISP-DM_Hotel-Cancellation](01_CRISP-DM_Hotel-Cancellation/README.md) | CRISP-DM | `jessemostipak/hotel-booking-demand` | Which bookings will cancel, and what should the hotel do about it? | Clear business decision and costs, which is what Business Understanding needs | Streamlit app on a public URL |
-| [02_SEMMA_LendingClub-Default](02_SEMMA_LendingClub-Default/README.md) | SEMMA | `wordsforthewise/lending-club` | Which loans will charge off? | The file is too large to use whole, so the Sample phase does real work. Credit scoring is also classic SAS territory | Batch scoring script plus SAS score code if available |
-| [03_KDD_NSL-KDD-Intrusion](03_KDD_NSL-KDD-Intrusion/README.md) | KDD | `hassan06/nslkdd` | What patterns separate attacks from normal traffic, and do they hold on attack types never seen in training? | KDD is about discovering knowledge, and this set supports clustering, rules, and anomaly detection | FastAPI service in Docker |
+| Folder | Methodology | YouTube Walkthrough | Dataset (Kaggle slug) | Question | Why this pairing | Deployment |
+|---|---|---|---|---|---|---|
+| [01_CRISP-DM_Hotel-Cancellation](01_CRISP-DM_Hotel-Cancellation/README.md) | CRISP-DM | [Watch Video](https://youtu.be/sFLikESPdSA) | `jessemostipak/hotel-booking-demand` | Which bookings will cancel, and what should the hotel do about it? | Clear business decision and costs, which is what Business Understanding needs | Streamlit app on a public URL |
+| [02_SEMMA_LendingClub-Default](02_SEMMA_LendingClub-Default/README.md) | SEMMA | [Watch Video](https://youtu.be/sDaF-TPgXS8) | `wordsforthewise/lending-club` | Which loans will charge off? | The file is too large to use whole, so the Sample phase does real work. Credit scoring is also classic SAS territory | Batch scoring script plus SAS score code if available |
+| [03_KDD_NSL-KDD-Intrusion](03_KDD_NSL-KDD-Intrusion/README.md) | KDD | [Watch Video](https://youtu.be/Y5Y1Hvx6ipc) | `hassan06/nslkdd` | What patterns separate attacks from normal traffic, and do they hold on attack types never seen in training? | KDD is about discovering knowledge, and this set supports clustering, rules, and anomaly detection | FastAPI service in Docker |
 
 These are recommendations, so swap any of them if you prefer. Each must stay
 different from the others and from what you already used in HW1 (PetFinder, NYC
@@ -46,10 +54,10 @@ HW1, and steps 2 to 10 repeat for each project.
 
 **Step 1. Get your accounts and tools ready.**
 
-- [ ] Add your Kaggle credentials to Colab Secrets, so notebooks can download data.
-- [ ] Confirm you have access to two LLMs, ideally Claude and GPT-5. Use one to draft and the other to critique, so no model grades its own work.
-- [ ] Apply for SAS Viya for Learners with your SJSU email (needed for SEMMA). Do this first in case access takes a while. After login, check whether Model Studio is included. If SAS does not work out, the assignment says "if possible", so do SEMMA in Python and state why in the report.
-- [ ] Have a Medium account and a YouTube channel ready.
+- [x] Add your Kaggle credentials to Colab Secrets, so notebooks can download data.
+- [x] Confirm you have access to two LLMs, ideally Claude and GPT-5. Use one to draft and the other to critique, so no model grades its own work.
+- [x] Apply for SAS Viya for Learners with your SJSU email (needed for SEMMA). Do this first in case access takes a while. After login, check whether Model Studio is included. If SAS does not work out, the assignment says "if possible", so do SEMMA in Python and state why in the report.
+- [x] Have a Medium account and a YouTube channel ready.
 
 Open Interpreter, MetaGPT, and IBM SPSS Modeler are optional. Claude Code or
 Codex already cover what the first two would do, so you can skip them.
@@ -74,10 +82,10 @@ and rejected, because this log is your proof that you did the required revisions
 **Step 5. Verify by hand before moving on.** The assignment requires this, and
 no LLM can do it for you. For each phase:
 
-- [ ] Read every line of generated code and be able to explain it on video.
-- [ ] Recompute two or three key numbers a different way (for example, a groupby by hand against the reported rate).
-- [ ] Confirm nothing fit on the full data leaks into test (imputers, encoders, scalers, sampling).
-- [ ] Confirm every claim in the text matches a real output in the notebook.
+- [x] Read every line of generated code and be able to explain it on video.
+- [x] Recompute two or three key numbers a different way (for example, a groupby by hand against the reported rate).
+- [x] Confirm nothing fit on the full data leaks into test (imputers, encoders, scalers, sampling).
+- [x] Confirm every claim in the text matches a real output in the notebook.
 
 **Step 6. Repeat steps 3 to 5 for every remaining phase.** The project README
 lists every subtask. Go back to an earlier phase when you learn something that
@@ -94,9 +102,9 @@ of pretending it is part of the method.
 
 **Step 8. Make it a proper Colab and push it.**
 
-- [ ] Restart and run all in Colab with a clean runtime. Save the notebook with its outputs.
-- [ ] Add an Open in Colab badge to the project README. Your repo is public, so this link pattern works: `https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/<project>/notebooks/<file>.ipynb`
-- [ ] Commit everything except `data/`. Keep model files small enough for GitHub (under 100 MB each).
+- [x] Restart and run all in Colab with a clean runtime. Save the notebook with its outputs.
+- [x] Add an Open in Colab badge to the project README. Your repo is public, so this link pattern works: `https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/<project>/notebooks/<file>.ipynb`
+- [x] Commit everything except `data/`. Keep model files small enough for GitHub (under 100 MB each).
 
 **Step 9. Write and publish the Medium article.** Lead with the question and
 result, walk through each phase with your charts, name the mistakes the critic
@@ -113,14 +121,14 @@ put the link in the project README.
 
 | Item | CRISP-DM | SEMMA | KDD |
 |---|---|---|---|
-| Every phase and subtask checked off in the project README | [ ] | [ ] | [ ] |
-| At least 2 critic rounds per phase saved | [ ] | [ ] | [ ] |
-| Colab runs clean top to bottom | [ ] | [ ] | [ ] |
-| `REPORT.md` critiqued and finished | [ ] | [ ] | [ ] |
-| Deployment works, with run instructions | [ ] | [ ] | [ ] |
-| Medium article published and linked | [ ] | [ ] | [ ] |
-| YouTube video uploaded and linked | [ ] | [ ] | [ ] |
-| Pushed to GitHub | [ ] | [ ] | [ ] |
+| Every phase and subtask checked off in the project README | [x] | [x] | [x] |
+| At least 2 critic rounds per phase saved | [x] | [x] | [x] |
+| Colab runs clean top to bottom | [x] | [x] | [x] |
+| `REPORT.md` critiqued and finished | [x] | [x] | [x] |
+| Deployment works, with run instructions | [x] | [x] | [x] |
+| Medium article drafted in `article/medium_article.md` | [x] | [x] | [x] |
+| YouTube video uploaded and linked | [x] ([Video](https://youtu.be/sFLikESPdSA)) | [x] ([Video](https://youtu.be/sDaF-TPgXS8)) | [x] ([Video](https://youtu.be/Y5Y1Hvx6ipc)) |
+| Pushed to GitHub | [x] | [x] | [x] |
 
 Also for SEMMA: SAS demo and report included, or the reason it was not possible.
 

@@ -2,7 +2,7 @@
 
 *A KDD walkthrough on NSL-KDD: what patterns separate attacks from normal traffic, and do they hold for attack types the model never saw?*
 
-**[Links to add: Colab notebook · GitHub repo · walkthrough video]**
+**[Colab notebook](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/03_KDD_NSL-KDD-Intrusion/notebooks/kdd_nsl_kdd.ipynb) · [GitHub repo](https://github.com/olegm-sjsu/Data-Mining/tree/main/Data-Science-Methodologies/03_KDD_NSL-KDD-Intrusion) · [Walkthrough video](https://youtu.be/Y5Y1Hvx6ipc)**
 
 A random train/validation split says my classifier is 99.9% accurate (macro-F1 0.97). On the official test set the same model gets
 78% accuracy and macro-F1 0.60. Nothing is wrong with the code. The test set is *designed* to be different, and the gap is the interesting

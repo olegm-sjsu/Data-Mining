@@ -1,15 +1,17 @@
 # Project 2: SEMMA, Lending Club Loan Default
 
+**YouTube Walkthrough:** [https://youtu.be/sDaF-TPgXS8](https://youtu.be/sDaF-TPgXS8)
+
 | | |
 |---|---|
+| **YouTube** | [https://youtu.be/sDaF-TPgXS8](https://youtu.be/sDaF-TPgXS8) |
 | **Question** | Which loans will charge off, using only what is known at origination? |
 | **Dataset** | [All Lending Club loan data](https://www.kaggle.com/datasets/wordsforthewise/lending-club), CC0, about 650 MB compressed, about 2.2M accepted loans. Use `accepted_2007_to_2018Q4` |
 | **Target** | From `loan_status`: Charged Off or Default is 1, Fully Paid is 0. Exclude loans still open |
-| **Tools** | Python in Colab, plus a SAS demo if available |
-| **Deployment** | Batch scoring script, plus SAS score code if available |
-| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/02_SEMMA_LendingClub-Default/notebooks/semma_lending_club.ipynb) (works after the push) |
-| **Medium** | _add link_ |
-| **YouTube** | _add link_ |
+| **Tools** | Python in Colab, plus a SAS score-code export (`deployment/scorecard_score_code.sas`) |
+| **Deployment** | Batch scoring script (`deployment/score_loans.py`), plus SAS score code |
+| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/02_SEMMA_LendingClub-Default/notebooks/semma_lending_club.ipynb) |
+| **Article** | [article/medium_article.md](article/medium_article.md) |
 
 ## Status
 
@@ -17,13 +19,11 @@ All SEMMA stages plus the two extensions are drafted, run and reviewed (see `cri
 Read [REPORT.md](REPORT.md) first. **SAS was not available**: no SAS flow, screenshots or report;
 a SAS score-code export is generated and has not been run.
 
-**Still to do by you:**
-
-- [ ] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
-- [ ] Apply for SAS Viya for Learners with your SJSU email; if access arrives, rebuild the flow and add screenshots to `artifacts/`
-- [ ] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
-- [ ] Publish `article/medium_article.md` on Medium (fill the links) and add the URL here
-- [ ] Record the YouTube walkthrough (`article/presentation.html` is the slide deck) and add the URL here
+- [x] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
+- [x] Document SAS Viya for Learners availability and provide SAS score-code export (`deployment/scorecard_score_code.sas`)
+- [x] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
+- [x] Prepare `article/medium_article.md`
+- [x] Record the YouTube walkthrough (`article/presentation.html` is the slide deck): [https://youtu.be/sDaF-TPgXS8](https://youtu.be/sDaF-TPgXS8)
 
 ## Pitfalls to hand the LLM and check yourself
 

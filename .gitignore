@@ -1,5 +1,8 @@
 .DS_Store
 *.mp4
+*.mov
+*.mkv
+*.webm
 
 # Python environments and generated files
 .venv/
@@ -27,5 +30,6 @@ HW1/Part 2/04_associative_pattern_mining/artifacts/.cache/
 HW1/Part 2/05_data_science_skills_lab/webapp/data/creditcard.csv
 HW1/Part 2/05_data_science_skills_lab/webapp/data/online_retail.xlsx
 
-# Methodologies assignment: downloaded datasets stay out of git
+# Methodologies assignment: downloaded datasets and video scripts stay out of git
 Data-Science-Methodologies/*/data/
+Data-Science-Methodologies/video_scripts/

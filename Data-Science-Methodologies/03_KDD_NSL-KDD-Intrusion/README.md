@@ -1,27 +1,27 @@
 # Project 3: KDD, Network Intrusion Knowledge Discovery
 
+**YouTube Walkthrough:** [https://youtu.be/Y5Y1Hvx6ipc](https://youtu.be/Y5Y1Hvx6ipc)
+
 | | |
 |---|---|
+| **YouTube** | [https://youtu.be/Y5Y1Hvx6ipc](https://youtu.be/Y5Y1Hvx6ipc) |
 | **Question** | What patterns separate attacks from normal traffic, and do they hold on attack types never seen in training? |
 | **Dataset** | [NSL-KDD](https://www.kaggle.com/datasets/hassan06/nslkdd). Use `KDDTrain+`, `KDDTest+`, and `KDDTest-21`. About 126k training and 22.5k test records |
 | **Source to cite** | Tavallaee et al., "A detailed analysis of the KDD CUP 99 data set", 2009. The Kaggle page lists the license as Unknown, so credit the original authors |
 | **Target** | `label`, grouped into normal, DoS, Probe, R2L, U2R |
-| **Deployment** | FastAPI service in Docker |
-| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/03_KDD_NSL-KDD-Intrusion/notebooks/kdd_nsl_kdd.ipynb) (works after the push) |
-| **Medium** | _add link_ |
-| **YouTube** | _add link_ |
+| **Deployment** | FastAPI service in Docker (`deployment/`) |
+| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/03_KDD_NSL-KDD-Intrusion/notebooks/kdd_nsl_kdd.ipynb) |
+| **Article** | [article/medium_article.md](article/medium_article.md) |
 
 ## Status
 
 All KDD steps plus the extension are drafted, run and reviewed (see `critic_reviews/`). Read [REPORT.md](REPORT.md) first. **All four pre-registered knowledge goals failed their
 conditions** and the report says so. Optional LSH was not done.
 
-**Still to do by you:**
-
-- [ ] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
-- [ ] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
-- [ ] Publish `article/medium_article.md` on Medium (fill the links) and add the URL here
-- [ ] Record the YouTube walkthrough (`article/presentation.html` is the slide deck) and add the URL here
+- [x] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
+- [x] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
+- [x] Prepare `article/medium_article.md`
+- [x] Record the YouTube walkthrough (`article/presentation.html` is the slide deck): [https://youtu.be/Y5Y1Hvx6ipc](https://youtu.be/Y5Y1Hvx6ipc)
 
 ## Pitfalls to hand the LLM and check yourself
 

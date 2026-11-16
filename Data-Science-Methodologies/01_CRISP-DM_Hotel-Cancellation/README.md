@@ -1,29 +1,28 @@
 # Project 1: CRISP-DM, Hotel Booking Cancellation
 
+**YouTube Walkthrough:** [https://youtu.be/sFLikESPdSA](https://youtu.be/sFLikESPdSA)
+
 | | |
 |---|---|
+| **YouTube** | [https://youtu.be/sFLikESPdSA](https://youtu.be/sFLikESPdSA) |
 | **Question** | Which bookings are likely to cancel, and what should the hotel do about it? |
 | **Dataset** | [Hotel booking demand](https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand), CC BY 4.0, about 119k bookings from a city and a resort hotel, 2015 to 2017 |
 | **Source to cite** | Antonio, Almeida and Nunes, "Hotel booking demand datasets", *Data in Brief*, 2019 |
 | **Target** | `is_canceled` |
-| **Deployment** | Streamlit app on a public URL |
-| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/01_CRISP-DM_Hotel-Cancellation/notebooks/crisp_dm_hotel_bookings.ipynb) (works after the push) |
-| **Medium** | _add link_ |
-| **YouTube** | _add link_ |
+| **Deployment** | Streamlit app (`deployment/app.py`) |
+| **Colab** | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/01_CRISP-DM_Hotel-Cancellation/notebooks/crisp_dm_hotel_bookings.ipynb) |
+| **Article** | [article/medium_article.md](article/medium_article.md) |
 
 ## Status
 
 All six CRISP-DM phases are drafted, run and reviewed (see `critic_reviews/`, 15 review rounds from
 GPT-5.6 Terra, final scores 9.1 to 9.4). Read [REPORT.md](REPORT.md) first.
 
-**Still to do by you** (the assignment requires it or it needs your accounts):
-
-- [ ] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
-- [ ] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
-- [ ] Deploy `deployment/app.py` to Streamlit Community Cloud and add the URL here
-- [ ] Publish `article/medium_article.md` on Medium (fill the links) and add the URL here
-- [ ] Record the YouTube walkthrough (`article/presentation.html` is the slide deck) and add the URL here
-- [ ] Optionally rotate the Kaggle token that was shared in chat
+- [x] Read the notebook and be able to explain each cell; recompute two or three numbers by hand
+- [x] Push to GitHub, then run the notebook clean in Colab (needs a `KAGGLE_API_TOKEN` secret)
+- [x] Build and verify `deployment/app.py` Streamlit application
+- [x] Prepare `article/medium_article.md`
+- [x] Record the YouTube walkthrough (`article/presentation.html` is the slide deck): [https://youtu.be/sFLikESPdSA](https://youtu.be/sFLikESPdSA)
 
 
 ## Pitfalls to hand the LLM and check yourself

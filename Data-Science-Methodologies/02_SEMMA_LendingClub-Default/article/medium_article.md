@@ -3,7 +3,7 @@
 *A SEMMA walkthrough on 2.26 million Lending Club loans, with a leaky column, a test I could not
 call sealed, and a profit result I did not expect.*
 
-**[Links to add: Colab notebook · GitHub repo · walkthrough video]**
+**[Colab notebook](https://colab.research.google.com/github/olegm-sjsu/Data-Mining/blob/main/Data-Science-Methodologies/02_SEMMA_LendingClub-Default/notebooks/semma_lending_club.ipynb) · [GitHub repo](https://github.com/olegm-sjsu/Data-Mining/tree/main/Data-Science-Methodologies/02_SEMMA_LendingClub-Default) · [Walkthrough video](https://youtu.be/sDaF-TPgXS8)**
 
 Everyone knows the recipe: predict who will default, decline them, make more money. I tried it
 on all of Lending Club's accepted loans (2007 to 2018), following SAS's SEMMA stages (Sample,
